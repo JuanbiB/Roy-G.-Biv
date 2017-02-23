@@ -32,7 +32,7 @@ public class PlatformerController : MonoBehaviour
 		rb2d = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		sr = GetComponent<SpriteRenderer> ();
-		gameObject.GetComponent<SpriteRenderer> ().color = Color.blue;
+		gameObject.GetComponent<SpriteRenderer> ().color = Color.red;
 	}
 
 	void FixedUpdate ()
