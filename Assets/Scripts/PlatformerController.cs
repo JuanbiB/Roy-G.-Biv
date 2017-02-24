@@ -27,13 +27,33 @@ public class PlatformerController : MonoBehaviour
 	float lastInputJump;
 	int facing = 1;
 
+    public enum Mode { White, Red, Yellow, Blue}
+
+    public Mode playerMode;
+
 	void Start ()
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		sr = GetComponent<SpriteRenderer> ();
-		gameObject.GetComponent<SpriteRenderer> ().color = Color.red;
+        playerMode = Mode.White;
 	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            RedMode();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            YellowMode();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            BlueMode();
+        }
+    }
 
 	void FixedUpdate ()
 	{
@@ -102,4 +122,33 @@ public class PlatformerController : MonoBehaviour
 		}
 		return false;
 	}
+
+    void ChangeMode()
+    {
+        jumpVelocity = 15;
+        speed = 5;
+    }
+
+    void RedMode()
+    {
+        ChangeMode();
+        playerMode = Mode.Red;
+        sr.color = Color.red;
+        jumpVelocity = 25;
+    }
+
+    void YellowMode()
+    {
+        ChangeMode();
+        playerMode = Mode.Yellow;
+        sr.color = Color.yellow;
+        speed = 15;
+    }
+
+    void BlueMode()
+    {
+        ChangeMode();
+        sr.color = Color.blue;
+    }
+    
 }
