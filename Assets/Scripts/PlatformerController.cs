@@ -55,12 +55,14 @@ public class PlatformerController : MonoBehaviour
 		newVelocity.x = input.x * speed;
 		newVelocity.y += -gravity * Time.deltaTime;
 
-		// Capping fall velocity
-		if (newVelocity.y > -30) {
-			rb2d.velocity = newVelocity;
-		} else {
+		if (playerMode == Mode.Blue && newVelocity.y < -20) {
 			rb2d.velocity = new Vector2 (newVelocity.x, rb2d.velocity.y);
+		} else {
+			rb2d.velocity = newVelocity;
 		}
+
+		Debug.Log (rb2d.velocity.y);
+
 	}
 
 	void Jump ()
