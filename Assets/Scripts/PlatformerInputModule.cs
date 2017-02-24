@@ -23,9 +23,48 @@ public class PlatformerInputModule : MonoBehaviour
     }
 
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.name == "juanbi") {
+        if (other.name == "juanbi") {
 			controller.jumpVelocity = 25;
 			Destroy (other.gameObject);
 		}
-	}
+
+        // Was using this code to play around with different ways for the player to move with a moving platform
+        /**
+        if (other.gameObject.tag == "MovingPlatform")
+        {
+            transform.SetParent(other.transform);
+        }*/
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "MovingPlatform")
+        {
+            transform.SetParent(other.transform);
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "MovingPlatform")
+        {
+            transform.SetParent(null);
+        }
+    }
+
+    // Was using this code to play around with different ways for the player to move with a moving platform
+    /**
+    void OnTriggerExit2D(Collider2D other)
+    {
+        transform.SetParent(null);
+    }
+
+    void onTriggerStay2D(Collider2D other)
+    {
+        Debug.Log("stay");
+        if (other.gameObject.tag == "MovingPlatform") {
+            Debug.Log("hi");
+            transform.SetParent(other.transform);
+        }
+    }*/
 }
