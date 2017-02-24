@@ -39,22 +39,6 @@ public class PlatformerController : MonoBehaviour
         playerMode = Mode.White;
 	}
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            RedMode();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            YellowMode();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            BlueMode();
-        }
-    }
-
 	void FixedUpdate ()
 	{
 		grounded = CheckGrounded ();
@@ -123,6 +107,19 @@ public class PlatformerController : MonoBehaviour
 		return false;
 	}
 
+	public void CheckMode(){
+
+		if (playerMode == Mode.Blue) {
+			BlueMode ();
+		}
+		else if (playerMode == Mode.Red){
+			RedMode();
+		}
+		else if (playerMode == Mode.Yellow){
+			YellowMode();
+		}
+	}
+
     void ChangeMode()
     {
         jumpVelocity = 15;
@@ -149,6 +146,7 @@ public class PlatformerController : MonoBehaviour
     {
         ChangeMode();
         sr.color = Color.blue;
+
     }
     
 }

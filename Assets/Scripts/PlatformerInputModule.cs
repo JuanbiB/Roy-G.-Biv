@@ -20,6 +20,20 @@ public class PlatformerInputModule : MonoBehaviour
         }
         controller.input = input;
 		controller.inputJump = Input.GetButtonDown("Jump");
+
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			controller.playerMode = PlatformerController.Mode.Blue;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			controller.playerMode = PlatformerController.Mode.Red;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			controller.playerMode = PlatformerController.Mode.Yellow;
+		}
+		controller.CheckMode ();
     }
 
 	void OnTriggerEnter2D(Collider2D other){
