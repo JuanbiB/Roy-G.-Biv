@@ -124,6 +124,7 @@ public class PlatformerController : MonoBehaviour
     {
         jumpVelocity = 15;
         speed = 5;
+		gravity = 40;
     }
 
     void RedMode()
@@ -146,7 +147,7 @@ public class PlatformerController : MonoBehaviour
     {
         ChangeMode();
         sr.color = Color.blue;
-
+		gravity = 15;
     }
     
 }
