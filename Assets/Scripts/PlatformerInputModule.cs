@@ -23,15 +23,15 @@ public class PlatformerInputModule : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			controller.playerMode = PlatformerController.Mode.Blue;
+			controller.playerMode = PlatformerController.Mode.Red;
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
-			controller.playerMode = PlatformerController.Mode.Red;
+			controller.playerMode = PlatformerController.Mode.Yellow;
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			controller.playerMode = PlatformerController.Mode.Yellow;
+			controller.playerMode = PlatformerController.Mode.Blue;
 		}
 		controller.CheckMode ();
     }

@@ -146,7 +146,6 @@ public class PlatformerController : MonoBehaviour
     {
         ChangeMode();
         sr.color = Color.blue;
-
     }
     
 }
