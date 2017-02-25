@@ -27,8 +27,10 @@ public class PlatformerController : MonoBehaviour
 	float lastInputJump;
 	int facing = 1;
 
+    // Different modes for the player
     public enum Mode { White, Red, Yellow, Blue}
 
+    // Current mode of the player
     public Mode playerMode;
 
 	void Start ()
@@ -103,57 +105,52 @@ public class PlatformerController : MonoBehaviour
 		return (grounded || wasJustgrounded) && !hasJustJumped;
 	}
 
-	bool CheckJumpInput ()
-	{
-		if (inputJump) {
-			lastInputJump = Time.time;
-			return true;
-		}
-		if (Time.time < lastInputJump + jumpingTolerance) {
-			return true;
-		}
-		return false;
-	}
+    bool CheckJumpInput()
+    {
+        if (inputJump)
+        {
+            lastInputJump = Time.time;
+            return true;
+        }
+        if (Time.time < lastInputJump + jumpingTolerance)
+        {
+            return true;
+        }
+        return false;
+    }
 
-	public void CheckMode(){
-
-		if (playerMode == Mode.Blue) {
-			BlueMode ();
-		}
-		else if (playerMode == Mode.Red){
-			RedMode();
-		}
-		else if (playerMode == Mode.Yellow){
-			YellowMode();
-		}
-	}
-
-    void ChangeMode()
+    // Reset defaults to avoid retaining characteristics from other modes.
+    void ResetAttributes()
     {
         jumpVelocity = 15;
         speed = 5;
 		gravity = 40;
     }
 
-    void RedMode()
+
+    // Change to red mode, where the player can jump higher.
+    public void RedMode()
     {
-        ChangeMode();
+        ResetAttributes();
         playerMode = Mode.Red;
         sr.color = Color.red;
         jumpVelocity = 25;
     }
 
-    void YellowMode()
+    // Change to yellow mode, where the player can run faster.
+    public void YellowMode()
     {
-        ChangeMode();
+        ResetAttributes();
         playerMode = Mode.Yellow;
         sr.color = Color.yellow;
         speed = 15;
     }
 
-    void BlueMode()
+    //Change to blue mode, where the player glides.
+    public void BlueMode()
     {
-        ChangeMode();
+        ResetAttributes();
+        playerMode = Mode.Blue;
         sr.color = Color.blue;
 		gravity = 15;
     }

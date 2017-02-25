@@ -21,19 +21,18 @@ public class PlatformerInputModule : MonoBehaviour
         controller.input = input;
 		controller.inputJump = Input.GetButtonDown("Jump");
 
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			controller.playerMode = PlatformerController.Mode.Red;
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			controller.playerMode = PlatformerController.Mode.Yellow;
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			controller.playerMode = PlatformerController.Mode.Blue;
-		}
-		controller.CheckMode ();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            controller.RedMode();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            controller.YellowMode();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            controller.BlueMode();
+        }
     }
 
 	void OnTriggerEnter2D(Collider2D other){
