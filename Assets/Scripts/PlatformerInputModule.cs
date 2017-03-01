@@ -51,6 +51,7 @@ public class PlatformerInputModule : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+		Debug.Log ("yoo");
         if (other.gameObject.tag == "MovingPlatform")
         {
             transform.SetParent(other.transform);
@@ -62,6 +63,7 @@ public class PlatformerInputModule : MonoBehaviour
         if (other.gameObject.tag == "MovingPlatform")
         {
             transform.SetParent(null);
+			controller.GetComponent<Animator>().SetBool("grounded", false);
         }
     }
 		

@@ -41,7 +41,7 @@ public class PlatformerController : MonoBehaviour
         playerMode = Mode.White;
 	}
 
-	void FixedUpdate ()
+	void Update ()
 	{
 		grounded = CheckGrounded ();
 		ApplyHorizontalInput ();
