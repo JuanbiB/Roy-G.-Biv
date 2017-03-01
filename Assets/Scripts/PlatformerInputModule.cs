@@ -8,13 +8,17 @@ public class PlatformerInputModule : MonoBehaviour
     PlatformerController controller;
 	public bool inDisplay;
 
+	RaycastHit2D hitSideRay;
+	public LayerMask playerMask;
+
     void Start()
     {
         controller = GetComponent<PlatformerController>();
 
+
     }
 
-    void FixedUpdate()
+    void Update()
     {
 		if (inDisplay) {
 			return;
@@ -51,11 +55,28 @@ public class PlatformerInputModule : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-		Debug.Log ("yoo");
-        if (other.gameObject.tag == "MovingPlatform")
-        {
-            transform.SetParent(other.transform);
-        }
+		if (other.gameObject.tag == "MovingPlatform")
+		{
+			hitSideRay = Physics2D.Linecast(transform.position, other.transform.position, playerMask);
+			Vector3 hitSideNormal = hitSideRay.normal;
+			hitSideNormal = hitSideRay.transform.TransformDirection(hitSideNormal);
+
+			if (hitSideNormal == hitSideRay.transform.up)
+			{
+				Debug.Log("top");
+				transform.SetParent(other.transform);
+			} else if (hitSideNormal == hitSideRay.transform.right)
+			{
+				Debug.Log("right");
+			} else if (hitSideNormal == -hitSideRay.transform.right)
+			{
+				Debug.Log("left");
+			} else if (hitSideNormal == -hitSideRay.transform.up)
+			{
+				Debug.Log("bottom");
+			}
+		}
+	
     }
 
     void OnCollisionExit2D(Collision2D other)
