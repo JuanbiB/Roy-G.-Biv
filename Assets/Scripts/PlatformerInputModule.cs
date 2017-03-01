@@ -6,14 +6,20 @@ using UnityEngine;
 public class PlatformerInputModule : MonoBehaviour
 {
     PlatformerController controller;
+	public bool inDisplay;
 
     void Start()
     {
         controller = GetComponent<PlatformerController>();
+
     }
 
     void FixedUpdate()
     {
+		if (inDisplay) {
+			return;
+		}
+
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (input.magnitude > 1) {
             input.Normalize();
@@ -40,13 +46,7 @@ public class PlatformerInputModule : MonoBehaviour
 			controller.jumpVelocity = 25;
 			Destroy (other.gameObject);
 		}
-
-        // Was using this code to play around with different ways for the player to move with a moving platform
-        /**
-        if (other.gameObject.tag == "MovingPlatform")
-        {
-            transform.SetParent(other.transform);
-        }*/
+			
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -64,20 +64,5 @@ public class PlatformerInputModule : MonoBehaviour
             transform.SetParent(null);
         }
     }
-
-    // Was using this code to play around with different ways for the player to move with a moving platform
-    /**
-    void OnTriggerExit2D(Collider2D other)
-    {
-        transform.SetParent(null);
-    }
-
-    void onTriggerStay2D(Collider2D other)
-    {
-        Debug.Log("stay");
-        if (other.gameObject.tag == "MovingPlatform") {
-            Debug.Log("hi");
-            transform.SetParent(other.transform);
-        }
-    }*/
+		
 }

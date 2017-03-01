@@ -63,8 +63,6 @@ public class PlatformerController : MonoBehaviour
 			rb2d.velocity = newVelocity;
 		}
 
-		Debug.Log (rb2d.velocity.y);
-
 	}
 
 	void Jump ()
@@ -153,6 +151,7 @@ public class PlatformerController : MonoBehaviour
         playerMode = Mode.Blue;
         sr.color = Color.blue;
 		gravity = 15;
+		jumpVelocity = 10;
     }
     
 }
