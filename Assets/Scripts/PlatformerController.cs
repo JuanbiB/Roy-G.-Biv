@@ -27,6 +27,10 @@ public class PlatformerController : MonoBehaviour
 	float lastInputJump;
 	int facing = 1;
 
+    Transform myTrans, tagGround;
+    public LayerMask playerMask;
+    public bool isGrounded = false;
+
     // Different modes for the player
     public enum Mode { White, Red, Yellow, Blue}
 
@@ -36,6 +40,9 @@ public class PlatformerController : MonoBehaviour
 	void Start ()
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
+        myTrans = this.transform;
+        tagGround = GameObject.Find(this.name + "/tag_ground").transform;
+
 		anim = GetComponent<Animator> ();
 		sr = GetComponent<SpriteRenderer> ();
         playerMode = Mode.White;
@@ -43,11 +50,21 @@ public class PlatformerController : MonoBehaviour
 
 	void Update ()
 	{
-		grounded = CheckGrounded ();
-		ApplyHorizontalInput ();
+        isGrounded = Physics2D.Linecast(myTrans.position, tagGround.position, playerMask);
+        
+        // grounded = CheckGrounded ();
+        ApplyHorizontalInput ();
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
+
+        /*
 		if (CheckJumpInput () && PermissionToJump ()) {
 			Jump ();
-		}
+		}*/
+
 		UpdateAnimations ();
 	}
 
@@ -67,11 +84,18 @@ public class PlatformerController : MonoBehaviour
 
 	void Jump ()
 	{
+        if (isGrounded)
+        {
+            rb2d.velocity += jumpVelocity * Vector2.up;
+        }
+
+        /*
 		rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpVelocity);
 		lastJumpTime = Time.time;
-		grounded = false;
+		grounded = false;*/
 	}
 
+    /*
 	bool CheckGrounded ()
 	{
 		if (groundCollider.IsTouchingLayers (groundLayers)) {
@@ -79,23 +103,27 @@ public class PlatformerController : MonoBehaviour
 			return true;
 		}
 		return false;
-	}
+	}*/
 
+        
 	void UpdateAnimations ()
-	{
+	{ 
 		if (rb2d.velocity.x > 0 && facing == -1) {
 			facing = 1;
 		} else if(rb2d.velocity.x < 0 && facing == 1) {
 			facing = -1;
 		}
 		sr.flipX = facing == -1 ;
-		anim.SetBool ("grounded", grounded);
+
+        //CHANGED isGROUNDED and FIXED ANIMATIONS on PLATFORMS
+		anim.SetBool ("grounded", isGrounded);
 		anim.SetFloat ("speed", Mathf.Abs(rb2d.velocity.x));
 		if (lastJumpTime == Time.time) {
 			anim.SetTrigger ("jump");
 		}
 	}
 
+    /*
 	bool PermissionToJump ()
 	{
 		bool wasJustgrounded = Time.time < lostGroundingTime + groundingTolerance;
@@ -116,6 +144,7 @@ public class PlatformerController : MonoBehaviour
         }
         return false;
     }
+    */
 
     // Reset defaults to avoid retaining characteristics from other modes.
     void ResetAttributes()
