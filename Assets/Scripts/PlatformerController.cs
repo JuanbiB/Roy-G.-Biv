@@ -27,7 +27,8 @@ public class PlatformerController : MonoBehaviour
 	float lastInputJump;
 	int facing = 1;
 
-    Transform myTrans, tagGround;
+	Transform myTrans;
+	GameObject[] groundTags;
     public LayerMask playerMask;
     public bool isGrounded = false;
 
@@ -41,7 +42,7 @@ public class PlatformerController : MonoBehaviour
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
         myTrans = this.transform;
-        tagGround = GameObject.Find(this.name + "/tag_ground").transform;
+		groundTags = GameObject.FindGameObjectsWithTag("ground_tag");
 
 		anim = GetComponent<Animator> ();
 		sr = GetComponent<SpriteRenderer> ();
@@ -50,7 +51,12 @@ public class PlatformerController : MonoBehaviour
 
 	void Update ()
 	{
-        isGrounded = Physics2D.Linecast(myTrans.position, tagGround.position, playerMask);
+		foreach (GameObject gt in groundTags) {
+			isGrounded = Physics2D.Linecast(myTrans.position, gt.transform.position, playerMask);
+			Debug.Log (isGrounded);
+			if (isGrounded)
+				break;	
+		}
         
         // grounded = CheckGrounded ();
         ApplyHorizontalInput ();
