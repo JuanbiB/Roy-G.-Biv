@@ -14,7 +14,6 @@ public class PlatformerController : MonoBehaviour
 	public float groundingTolerance = .1f;
 	public float jumpingTolerance = .1f;
 
-	public CircleCollider2D groundCollider;
 	public LayerMask groundLayers;
 
 	bool grounded;
@@ -53,7 +52,6 @@ public class PlatformerController : MonoBehaviour
 	{
 		foreach (GameObject gt in groundTags) {
 			isGrounded = Physics2D.Linecast(myTrans.position, gt.transform.position, playerMask);
-			Debug.Log (isGrounded);
 			if (isGrounded)
 				break;	
 		}
@@ -65,11 +63,6 @@ public class PlatformerController : MonoBehaviour
         {
             Jump();
         }
-
-        /*
-		if (CheckJumpInput () && PermissionToJump ()) {
-			Jump ();
-		}*/
 
 		UpdateAnimations ();
 	}
@@ -94,22 +87,7 @@ public class PlatformerController : MonoBehaviour
         {
             rb2d.velocity += jumpVelocity * Vector2.up;
         }
-
-        /*
-		rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpVelocity);
-		lastJumpTime = Time.time;
-		grounded = false;*/
 	}
-
-    /*
-	bool CheckGrounded ()
-	{
-		if (groundCollider.IsTouchingLayers (groundLayers)) {
-			lostGroundingTime = Time.time;
-			return true;
-		}
-		return false;
-	}*/
 
         
 	void UpdateAnimations ()
