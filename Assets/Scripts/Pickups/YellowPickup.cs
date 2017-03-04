@@ -6,8 +6,8 @@ public class YellowPickup : ColorPickup {
 
     public override void MyFunction()
     {
-        GameManager.instance.yellowUnlocked = true;
-        Player.YellowMode();
+        Player.instance.yellowUnlocked = true;
+        Player.instance.controller.YellowMode();
     }
 
 }

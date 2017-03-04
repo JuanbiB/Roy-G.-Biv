@@ -14,8 +14,6 @@ public class PlatformerInputModule : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlatformerController>();
-
-
     }
 
     void Update()
@@ -31,15 +29,15 @@ public class PlatformerInputModule : MonoBehaviour
         controller.input = input;
 		controller.inputJump = Input.GetButtonDown("Jump");
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Player.instance.redUnlocked && Input.GetKeyDown(KeyCode.Alpha1))
         {
             controller.RedMode();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Player.instance.yellowUnlocked && Input.GetKeyDown(KeyCode.Alpha2))
         {
             controller.YellowMode();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Player.instance.blueUnlocked && Input.GetKeyDown(KeyCode.Alpha3))
         {
             controller.BlueMode();
         }

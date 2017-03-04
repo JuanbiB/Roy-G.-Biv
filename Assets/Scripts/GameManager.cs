@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -14,13 +15,9 @@ public class GameManager : MonoBehaviour {
     // Boolean representing if the game is paused or not
     public bool paused;
 
-    // Booleans representing if the player has unlocked various powerups
-    public bool redUnlocked;
-    public bool yellowUnlocked;
-    public bool blueUnlocked;
-
-    // UI component representing player state
-    public Sprite stateUI = null;
+    // UI component representing player state, and array holding all options
+    public Image stateUI;
+    public Sprite[] stateOptions;
 
     void Awake ()
     {
@@ -47,11 +44,6 @@ public class GameManager : MonoBehaviour {
         // Level begins at the main menu, unpaused
         level = 0;
         paused = false;
-
-        // Start without having player powers unlocked
-        redUnlocked = false;
-        yellowUnlocked = false;
-        blueUnlocked = false;
     }
 
 

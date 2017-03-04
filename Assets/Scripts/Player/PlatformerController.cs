@@ -22,7 +22,7 @@ public class PlatformerController : MonoBehaviour
 	Animator anim;
 
 	float lostGroundingTime;
-	float lastJumpTime;
+	//float lastJumpTime;
 	float lastInputJump;
 	int facing = 1;
 
@@ -30,12 +30,6 @@ public class PlatformerController : MonoBehaviour
 	GameObject[] groundTags;
     public LayerMask playerMask;
     public bool isGrounded = false;
-
-    // Different modes for the player
-    public enum Mode { White, Red, Yellow, Blue}
-
-    // Current mode of the player
-    public Mode playerMode;
 
 	void Start ()
 	{
@@ -45,7 +39,6 @@ public class PlatformerController : MonoBehaviour
 
 		anim = GetComponent<Animator> ();
 		sr = GetComponent<SpriteRenderer> ();
-        playerMode = Mode.White;
 	}
 
 	void Update ()
@@ -73,7 +66,7 @@ public class PlatformerController : MonoBehaviour
 		newVelocity.x = input.x * speed;
 		newVelocity.y += -gravity * Time.deltaTime;
 
-		if (playerMode == Mode.Blue && newVelocity.y < -20) {
+		if (Player.instance.playerMode == Player.Mode.Blue && newVelocity.y < -20) {
 			rb2d.velocity = new Vector2 (newVelocity.x, rb2d.velocity.y);
 		} else {
 			rb2d.velocity = newVelocity;
@@ -102,47 +95,81 @@ public class PlatformerController : MonoBehaviour
         //CHANGED isGROUNDED and FIXED ANIMATIONS on PLATFORMS
 		anim.SetBool ("grounded", isGrounded);
 		anim.SetFloat ("speed", Mathf.Abs(rb2d.velocity.x));
-		if (lastJumpTime == Time.time) {
-			anim.SetTrigger ("jump");
-		}
+		//if (lastJumpTime == Time.time) {
+		//	anim.SetTrigger ("jump");
+		//}
 	}
-		
 
     // Reset defaults to avoid retaining characteristics from other modes.
     void ResetAttributes()
     {
         jumpVelocity = 15;
         speed = 5;
-		gravity = 40;
+        gravity = 40;
     }
 
+    public void WhiteMode()
+    {
+        Player.instance.playerMode = Player.Mode.White;
+        sr.color = Color.white;
+        if (Player.instance.blueUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[6];
+        }
+        else if (Player.instance.yellowUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[3];
+        }
+        else if (Player.instance.redUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[1];
+        }
+    }
 
     // Change to red mode, where the player can jump higher.
     public void RedMode()
     {
         ResetAttributes();
-        playerMode = Mode.Red;
+        Player.instance.playerMode = Player.Mode.Red;
         sr.color = Color.red;
         jumpVelocity = 25;
+        if(Player.instance.blueUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[7];
+        } else if (Player.instance.yellowUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[4];
+        } else
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[2];
+        }
     }
 
     // Change to yellow mode, where the player can run faster.
     public void YellowMode()
     {
         ResetAttributes();
-        playerMode = Mode.Yellow;
+        Player.instance.playerMode = Player.Mode.Yellow;
         sr.color = Color.yellow;
         speed = 15;
+        if (Player.instance.blueUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[8];
+        }
+        else
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[5];
+        }
     }
 
     //Change to blue mode, where the player glides.
     public void BlueMode()
     {
         ResetAttributes();
-        playerMode = Mode.Blue;
+        Player.instance.playerMode = Player.Mode.Blue;
         sr.color = Color.blue;
-		gravity = 15;
-		jumpVelocity = 10;
+        gravity = 15;
+        jumpVelocity = 10;
+        GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
     }
-    
 }

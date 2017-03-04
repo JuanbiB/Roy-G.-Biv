@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour {
 
-	public void OnCollision2D(Collision2D other)
+	public void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("COLLISION");
             MyFunction();
             Destroy(gameObject);
         }
