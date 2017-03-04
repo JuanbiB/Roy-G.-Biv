@@ -106,29 +106,7 @@ public class PlatformerController : MonoBehaviour
 			anim.SetTrigger ("jump");
 		}
 	}
-
-    /*
-	bool PermissionToJump ()
-	{
-		bool wasJustgrounded = Time.time < lostGroundingTime + groundingTolerance;
-		bool hasJustJumped = Time.time < lastJumpTime + groundingTolerance + Time.deltaTime;
-		return (grounded || wasJustgrounded) && !hasJustJumped;
-	}
-
-    bool CheckJumpInput()
-    {
-        if (inputJump)
-        {
-            lastInputJump = Time.time;
-            return true;
-        }
-        if (Time.time < lastInputJump + jumpingTolerance)
-        {
-            return true;
-        }
-        return false;
-    }
-    */
+		
 
     // Reset defaults to avoid retaining characteristics from other modes.
     void ResetAttributes()
