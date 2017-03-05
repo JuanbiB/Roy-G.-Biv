@@ -16,14 +16,13 @@ public class PlatformerController : MonoBehaviour
 
 	public LayerMask groundLayers;
 
+	PlatformerInputModule inputModule;
+
 	bool grounded;
 	Rigidbody2D rb2d;
 	SpriteRenderer sr;
 	Animator anim;
 
-	float lostGroundingTime;
-	//float lastJumpTime;
-	float lastInputJump;
 	int facing = 1;
 
 	Transform myTrans;
@@ -36,6 +35,7 @@ public class PlatformerController : MonoBehaviour
 		rb2d = GetComponent<Rigidbody2D> ();
         myTrans = this.transform;
 		groundTags = GameObject.FindGameObjectsWithTag("ground_tag");
+		inputModule = gameObject.GetComponent<PlatformerInputModule> ();
 
 		anim = GetComponent<Animator> ();
 		sr = GetComponent<SpriteRenderer> ();
@@ -52,7 +52,7 @@ public class PlatformerController : MonoBehaviour
         // grounded = CheckGrounded ();
         ApplyHorizontalInput ();
 
-        if (Input.GetButtonDown("Jump"))
+		if (Input.GetButtonDown("Jump") && inputModule.inDisplay == false)
         {
             Jump();
         }

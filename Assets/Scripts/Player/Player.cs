@@ -85,5 +85,11 @@ public class Player : MonoBehaviour {
 
 	}
 
+	public void Die(){
+		gameObject.GetComponent<PlatformerInputModule> ().inDisplay = true;
+		controller.gravity = 0;
+		gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, -1, 0);
+	}
+
     
 }
