@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorPickup : Pickup {
+public class ColorPickup : MonoBehaviour {
 
     // All color pickups will oscillate in size
     void Update()
@@ -11,4 +11,16 @@ public class ColorPickup : Pickup {
         float y = 10 + 1f * Mathf.Cos(.7f * Time.time);
         transform.localScale = new Vector3(x, y, 1);
     }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            MyFunction();
+            Destroy(gameObject);
+        }
+    }
+
+    // Function of the pickup--should be overridden
+    public virtual void MyFunction() { }
 }
