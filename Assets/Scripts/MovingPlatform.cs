@@ -4,29 +4,34 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour {
 
-    public float MoveDistance;
+    public GameObject platform;
+
     public float MoveSpeed;
-
-    public int numOfPoints;
+    
     public Transform[] points;
-    public Transform current;
-
-    Vector3 startPos;
-    Vector3 endPos;
+    Transform endPoint;
+    int currentPointIndex;
 
     void Start()
     {
-        points = new Transform[numOfPoints];
+        endPoint = points[currentPointIndex];
     }
+    
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position == endPos)
+        if(points.Length <= 1)
         {
-            startPos = endPos;
-            endPos = endPos;
+            Debug.Log("Moving platform should have more than 1 point to cycle between.");
+            return;
         }
-        transform.position = Vector3.Lerp(startPos, endPos, (Mathf.Sin(MoveSpeed * Time.time) + 1.0f) / 2.0f);
-    }
+        Debug.Log(endPoint);
+        if (platform.transform.position == endPoint.position)
+        {
+            currentPointIndex = (currentPointIndex + 1) % points.Length;
+            endPoint = points[currentPointIndex];
+        }
+        platform.transform.position = Vector3.MoveTowards(platform.transform.position, endPoint.position, Time.deltaTime * MoveSpeed);
+    }   
 }
