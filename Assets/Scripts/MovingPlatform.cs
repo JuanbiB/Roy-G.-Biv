@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour {
 
+    public float MoveDistance;
+    public float MoveSpeed;
+
+    public int numOfPoints;
     public Transform[] points;
     public Transform current;
 
@@ -12,8 +16,7 @@ public class MovingPlatform : MonoBehaviour {
 
     void Start()
     {
-        startPos = new Vector3(transform.position.x, transform.position.y - MoveDistance, transform.position.z);
-        endPos = new Vector3(transform.position.x, transform.position.y + MoveDistance, transform.position.z);
+        points = new Transform[numOfPoints];
     }
 
     // Update is called once per frame
@@ -22,7 +25,7 @@ public class MovingPlatform : MonoBehaviour {
         if (transform.position == endPos)
         {
             startPos = endPos;
-            endPos = 
+            endPos = endPos;
         }
         transform.position = Vector3.Lerp(startPos, endPos, (Mathf.Sin(MoveSpeed * Time.time) + 1.0f) / 2.0f);
     }
