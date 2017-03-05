@@ -43,6 +43,9 @@ public class PlatformerController : MonoBehaviour
 
 	void Update ()
 	{
+		if (inputModule.inDisplay) {
+			return;
+		}
 		foreach (GameObject gt in groundTags) {
 			isGrounded = Physics2D.Linecast(myTrans.position, gt.transform.position, playerMask);
 			if (isGrounded)
@@ -52,7 +55,7 @@ public class PlatformerController : MonoBehaviour
         // grounded = CheckGrounded ();
         ApplyHorizontalInput ();
 
-		if (Input.GetButtonDown("Jump") && inputModule.inDisplay == false)
+		if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
