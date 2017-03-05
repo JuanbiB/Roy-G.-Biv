@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-
+	public float blacklifetime=5;
     // Instance of the player
     public static Player instance;
 
     // Different modes for the player
-    public enum Mode { White, Red, Yellow, Blue }
+    public enum Mode { White, Red, Yellow, Blue, Black }
 
     // Current mode of the player
     public Mode playerMode;
-
+	 
     // Controller of the player
     public PlatformerController controller;
 
@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
     public bool redUnlocked;
     public bool yellowUnlocked;
     public bool blueUnlocked;
+	//public bool blackUnlocked;
 
     void Awake()
     {
@@ -66,6 +67,21 @@ public class Player : MonoBehaviour {
 
 			Destroy (gameObject);
 		}
+	
+		else if (other.CompareTag("raindrop") && instance.playerMode!=Mode.Black) {
+			StartCoroutine (WaitSeconds (blacklifetime));
+			instance.playerMode = Mode.White;
+
+		}
+
+	}
+	IEnumerator WaitSeconds(float seconds){
+		instance.playerMode = Mode.Black;
+		yield return new  WaitForSeconds(seconds);
+	
+
+
+				
 
 	}
 

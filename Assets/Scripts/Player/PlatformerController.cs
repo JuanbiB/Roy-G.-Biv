@@ -172,4 +172,14 @@ public class PlatformerController : MonoBehaviour
         jumpVelocity = 10;
         GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
     }
+
+	public void BlackMode()
+	{
+		ResetAttributes();
+		Player.instance.playerMode = Player.Mode.Black;
+		sr.color = Color.black;
+		gravity = 80;
+		jumpVelocity = 2;
+		GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[0];
+	}
 }
