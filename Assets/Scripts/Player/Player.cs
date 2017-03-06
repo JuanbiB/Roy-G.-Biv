@@ -78,19 +78,20 @@ public class Player : MonoBehaviour {
 	public void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("obstacle")) {
 
-
 			Destroy (gameObject);
 		}
 	
-		 if (other.CompareTag("raindrop") && instance.playerMode!=Mode.Black) {
+		 if (other.CompareTag("raindrop")) {
 			StartCoroutine (WaitSeconds (blacklifetime));
 			instance.playerMode = Mode.White;
 
 		}
 
+
 	}
 	IEnumerator WaitSeconds(float seconds){
 		instance.playerMode = Mode.Black;
+		Player.instance.BlackMode();
 		yield return new  WaitForSeconds(seconds);
 	}
 
@@ -206,6 +207,7 @@ public class Player : MonoBehaviour {
         GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
     }
 
+	//change to black mode, where the player is slowed down and can't jump very high. 
     public void BlackMode()
     {
         ResetAttributes();
