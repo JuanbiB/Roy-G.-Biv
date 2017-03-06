@@ -22,6 +22,12 @@ public class Player : MonoBehaviour {
     public bool blueUnlocked;
 	//public bool blackUnlocked;
 
+	// Keeps track of player's latest checkpoint
+	Vector2 checkPoint;
+
+	// Stores the original value of gravity used in respawn
+	float originalGravity;
+
     void Awake()
     {
         // Check if instance already exists
@@ -48,12 +54,16 @@ public class Player : MonoBehaviour {
     {
         // Register the controller
         controller = gameObject.GetComponent<PlatformerController>();
+		originalGravity = controller.gravity;
 
         // Start white, without having any powers unlocked
         instance.playerMode = Mode.White;
         redUnlocked = false;
         yellowUnlocked = false;
         blueUnlocked = false;
+
+		// first checkpoint is always at beginning of the level
+		checkPoint = transform.position;
     }
 
     
@@ -78,16 +88,43 @@ public class Player : MonoBehaviour {
 	IEnumerator WaitSeconds(float seconds){
 		instance.playerMode = Mode.Black;
 		yield return new  WaitForSeconds(seconds);
-	
+	}
 
+	IEnumerator BeginRespawn(float seconds){
+		yield return new WaitForSeconds (seconds);
+
+		// return control to the player
+		gameObject.GetComponent<PlatformerInputModule> ().inDisplay = false;
+
+		// reset position to latest checkpoint
+		gameObject.transform.position = checkPoint;
+
+		// reset velocity to zero
+		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+
+		// reset dead boolean in the animator
+		gameObject.GetComponent<Animator> ().SetBool ("dead", false);
+
+		// reset gravity 
+		controller.gravity = originalGravity;
 	}
 
 	public void Die(){
+		// Prevent player from moving 
 		gameObject.GetComponent<PlatformerInputModule> ().inDisplay = true;
-		controller.gravity = 0;
-		gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, -1, 0);
 
+		// storing the original gravity value
+		originalGravity = controller.gravity;
+		controller.gravity = 0;
+
+		// Slow velocity as they enter the cloud
+		gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, -1, 0);
+		// Begin death animation
 		gameObject.GetComponent<Animator> ().SetBool ("dead", true);
+
+		// Start coroutine that'll reset the player's location to last checkpoint
+		StartCoroutine(BeginRespawn(2f));
+
 	}
 
     
