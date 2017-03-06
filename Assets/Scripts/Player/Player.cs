@@ -78,7 +78,7 @@ public class Player : MonoBehaviour {
 			Destroy (gameObject);
 		}
 	
-		else if (other.CompareTag("raindrop") && instance.playerMode!=Mode.Black) {
+		 if (other.CompareTag("raindrop") && instance.playerMode!=Mode.Black) {
 			StartCoroutine (WaitSeconds (blacklifetime));
 			instance.playerMode = Mode.White;
 
