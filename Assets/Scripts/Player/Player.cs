@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-	public float blacklifetime=5;
+
     // Instance of the player
     public static Player instance;
+
+    RaycastHit2D hitSideRay;
+    public LayerMask playerMask;
 
     // Different modes for the player
     public enum Mode { White, Red, Yellow, Blue, Black }
@@ -20,10 +23,12 @@ public class Player : MonoBehaviour {
     public bool redUnlocked;
     public bool yellowUnlocked;
     public bool blueUnlocked;
-	//public bool blackUnlocked;
 
-	// Keeps track of player's latest checkpoint
-	Vector2 checkPoint;
+    // Duration of the Black Mode debuff
+    public float blacklifetime = 5;
+
+    // Keeps track of player's latest checkpoint
+    Vector2 checkPoint;
 
 	// Stores the original value of gravity used in respawn
 	float originalGravity;
@@ -46,7 +51,7 @@ public class Player : MonoBehaviour {
 
         // Sets this to not be destroyed when loading a new scene.
         DontDestroyOnLoad(gameObject);
-
+        
     }
 
     // Use this for initialization
@@ -71,11 +76,7 @@ public class Player : MonoBehaviour {
         checkPoint = transform.position;
     }
     
-    void Respawn()
-    {
-
-    }
-	public void OnTriggerEnter2D(Collider2D other){
+    public void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("obstacle")) {
 			Destroy (gameObject);
 		}
@@ -218,6 +219,44 @@ public class Player : MonoBehaviour {
         controller.gravity = 80;
         controller.jumpVelocity = 2;
         GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[0];
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "MovingPlatform")
+        {
+            hitSideRay = Physics2D.Linecast(transform.position, other.transform.position, playerMask);
+            Vector3 hitSideNormal = hitSideRay.normal;
+            hitSideNormal = hitSideRay.transform.TransformDirection(hitSideNormal);
+
+            if (hitSideNormal == hitSideRay.transform.up)
+            {
+                Debug.Log("top");
+                transform.SetParent(other.transform);
+            }
+            else if (hitSideNormal == hitSideRay.transform.right)
+            {
+                Debug.Log("right");
+            }
+            else if (hitSideNormal == -hitSideRay.transform.right)
+            {
+                Debug.Log("left");
+            }
+            else if (hitSideNormal == -hitSideRay.transform.up)
+            {
+                Debug.Log("bottom");
+            }
+        }
+
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "MovingPlatform")
+        {
+            transform.SetParent(null);
+            controller.GetComponent<Animator>().SetBool("grounded", false);
+        }
     }
 
 }

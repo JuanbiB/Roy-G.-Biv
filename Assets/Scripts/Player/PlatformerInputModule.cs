@@ -8,9 +8,6 @@ public class PlatformerInputModule : MonoBehaviour
     PlatformerController controller;
 	public bool inDisplay;
 
-	RaycastHit2D hitSideRay;
-	public LayerMask playerMask;
-
     void Start()
     {
         controller = GetComponent<PlatformerController>();
@@ -40,41 +37,6 @@ public class PlatformerInputModule : MonoBehaviour
         else if (Player.instance.blueUnlocked && Input.GetKeyDown(KeyCode.Alpha3))
         {
             Player.instance.BlueMode();
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-		if (other.gameObject.tag == "MovingPlatform")
-		{
-			hitSideRay = Physics2D.Linecast(transform.position, other.transform.position, playerMask);
-			Vector3 hitSideNormal = hitSideRay.normal;
-			hitSideNormal = hitSideRay.transform.TransformDirection(hitSideNormal);
-
-			if (hitSideNormal == hitSideRay.transform.up)
-			{
-				Debug.Log("top");
-				transform.SetParent(other.transform);
-			} else if (hitSideNormal == hitSideRay.transform.right)
-			{
-				Debug.Log("right");
-			} else if (hitSideNormal == -hitSideRay.transform.right)
-			{
-				Debug.Log("left");
-			} else if (hitSideNormal == -hitSideRay.transform.up)
-			{
-				Debug.Log("bottom");
-			}
-		}
-	
-    }
-
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "MovingPlatform")
-        {
-            transform.SetParent(null);
-			controller.GetComponent<Animator>().SetBool("grounded", false);
         }
     }
 		
