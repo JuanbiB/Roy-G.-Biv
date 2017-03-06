@@ -147,15 +147,15 @@ public class Player : MonoBehaviour {
     {
         instance.playerMode = Mode.White;
         controller.sr.color = Color.white;
-        if (Player.instance.blueUnlocked)
+        if (instance.blueUnlocked)
         {
             GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[6];
         }
-        else if (Player.instance.yellowUnlocked)
+        else if (instance.yellowUnlocked)
         {
             GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[3];
         }
-        else if (Player.instance.redUnlocked)
+        else if (instance.redUnlocked)
         {
             GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[1];
         }
