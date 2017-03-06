@@ -83,7 +83,6 @@ public class Player : MonoBehaviour {
 		else if (other.CompareTag("raindrop") && instance.playerMode!=Mode.Black) {
 			StartCoroutine (WaitSeconds (blacklifetime));
 			instance.playerMode = Mode.White;
-
 		}
 
         else if(other.CompareTag("Checkpoint"))
