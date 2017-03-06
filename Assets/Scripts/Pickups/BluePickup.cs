@@ -7,7 +7,7 @@ public class BluePickup : ColorPickup {
     public override void MyFunction()
     {
         Player.instance.blueUnlocked = true;
-        Player.instance.controller.BlueMode();
+        Player.instance.BlueMode();
     }
 
 }

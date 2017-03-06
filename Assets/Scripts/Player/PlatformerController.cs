@@ -20,7 +20,7 @@ public class PlatformerController : MonoBehaviour
 
 	bool grounded;
 	Rigidbody2D rb2d;
-	SpriteRenderer sr;
+	public SpriteRenderer sr;
 	Animator anim;
 
 	int facing = 1;
@@ -101,88 +101,5 @@ public class PlatformerController : MonoBehaviour
 		//if (lastJumpTime == Time.time) {
 		//	anim.SetTrigger ("jump");
 		//}
-	}
-
-    // Reset defaults to avoid retaining characteristics from other modes.
-    void ResetAttributes()
-    {
-        jumpVelocity = 15;
-        speed = 5;
-        gravity = 40;
-    }
-
-    public void WhiteMode()
-    {
-        Player.instance.playerMode = Player.Mode.White;
-        sr.color = Color.white;
-        if (Player.instance.blueUnlocked)
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[6];
-        }
-        else if (Player.instance.yellowUnlocked)
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[3];
-        }
-        else if (Player.instance.redUnlocked)
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[1];
-        }
-    }
-
-    // Change to red mode, where the player can jump higher.
-    public void RedMode()
-    {
-        ResetAttributes();
-        Player.instance.playerMode = Player.Mode.Red;
-        sr.color = Color.red;
-        jumpVelocity = 25;
-        if(Player.instance.blueUnlocked)
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[7];
-        } else if (Player.instance.yellowUnlocked)
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[4];
-        } else
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[2];
-        }
-    }
-
-    // Change to yellow mode, where the player can run faster.
-    public void YellowMode()
-    {
-        ResetAttributes();
-        Player.instance.playerMode = Player.Mode.Yellow;
-        sr.color = Color.yellow;
-        speed = 15;
-        if (Player.instance.blueUnlocked)
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[8];
-        }
-        else
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[5];
-        }
-    }
-
-    //Change to blue mode, where the player glides.
-    public void BlueMode()
-    {
-        ResetAttributes();
-        Player.instance.playerMode = Player.Mode.Blue;
-        sr.color = Color.blue;
-        gravity = 15;
-        jumpVelocity = 10;
-        GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
-    }
-
-	public void BlackMode()
-	{
-		ResetAttributes();
-		Player.instance.playerMode = Player.Mode.Black;
-		sr.color = Color.black;
-		gravity = 80;
-		jumpVelocity = 2;
-		GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[0];
 	}
 }

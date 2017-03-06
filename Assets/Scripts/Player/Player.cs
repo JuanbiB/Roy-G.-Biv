@@ -127,5 +127,89 @@ public class Player : MonoBehaviour {
 
 	}
 
-    
+    // Reset defaults to avoid retaining characteristics from other modes.
+    void ResetAttributes()
+    {
+        controller.jumpVelocity = 15;
+        controller.speed = 5;
+        controller.gravity = 40;
+    }
+
+    public void WhiteMode()
+    {
+        instance.playerMode = Mode.White;
+        controller.sr.color = Color.white;
+        if (Player.instance.blueUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[6];
+        }
+        else if (Player.instance.yellowUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[3];
+        }
+        else if (Player.instance.redUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[1];
+        }
+    }
+
+    // Change to red mode, where the player can jump higher.
+    public void RedMode()
+    {
+        ResetAttributes();
+        instance.playerMode = Mode.Red;
+        controller.sr.color = Color.red;
+        controller.jumpVelocity = 25;
+        if (instance.blueUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[7];
+        }
+        else if (instance.yellowUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[4];
+        }
+        else
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[2];
+        }
+    }
+
+    // Change to yellow mode, where the player can run faster.
+    public void YellowMode()
+    {
+        ResetAttributes();
+        instance.playerMode = Mode.Yellow;
+        controller.sr.color = Color.yellow;
+        controller.speed = 15;
+        if (instance.blueUnlocked)
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[8];
+        }
+        else
+        {
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[5];
+        }
+    }
+
+    //Change to blue mode, where the player glides.
+    public void BlueMode()
+    {
+        ResetAttributes();
+        instance.playerMode = Mode.Blue;
+        controller.sr.color = Color.blue;
+        controller.gravity = 15;
+        controller.jumpVelocity = 10;
+        GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
+    }
+
+    public void BlackMode()
+    {
+        ResetAttributes();
+        instance.playerMode = Mode.Black;
+        controller.sr.color = Color.black;
+        controller.gravity = 80;
+        controller.jumpVelocity = 2;
+        GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[0];
+    }
+
 }
