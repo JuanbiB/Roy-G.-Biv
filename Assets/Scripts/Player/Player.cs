@@ -66,6 +66,10 @@ public class Player : MonoBehaviour {
 		checkPoint = transform.position;
     }
 
+    public void SetCheckpoint()
+    {
+        checkPoint = transform.position;
+    }
     
     void Respawn()
     {
@@ -73,8 +77,6 @@ public class Player : MonoBehaviour {
     }
 	public void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("obstacle")) {
-
-
 			Destroy (gameObject);
 		}
 	
@@ -84,8 +86,15 @@ public class Player : MonoBehaviour {
 
 		}
 
-	}
-	IEnumerator WaitSeconds(float seconds){
+        else if(other.CompareTag("Checkpoint"))
+        {
+            SetCheckpoint();
+            SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer>();
+            flagsr.color = Color.black;
+        }
+    }
+
+    IEnumerator WaitSeconds(float seconds){
 		instance.playerMode = Mode.Black;
 		yield return new  WaitForSeconds(seconds);
 	}
