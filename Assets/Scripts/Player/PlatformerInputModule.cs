@@ -6,18 +6,32 @@ using UnityEngine;
 public class PlatformerInputModule : MonoBehaviour
 {
     PlatformerController controller;
-	public bool inDisplay;
+    ColorManager CM;
 
     void Start()
     {
         controller = GetComponent<PlatformerController>();
+        CM = GetComponent<ColorManager>();
     }
 
     void Update()
     {
-		if (inDisplay) {
+		if (Player.instance.inDisplay) {
 			return;
 		}
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            CM.RedMode();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            CM.YellowMode();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            CM.BlueMode();
+        }
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (input.magnitude > 1) {
@@ -25,19 +39,6 @@ public class PlatformerInputModule : MonoBehaviour
         }
         controller.input = input;
 		controller.inputJump = Input.GetButtonDown("Jump");
-
-        if (Player.instance.redUnlocked && Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Player.instance.RedMode();
-        }
-        else if (Player.instance.yellowUnlocked && Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Player.instance.YellowMode();
-        }
-        else if (Player.instance.blueUnlocked && Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Player.instance.BlueMode();
-        }
     }
 		
 }

@@ -16,9 +16,8 @@ public class PlatformerController : MonoBehaviour
 
 	public LayerMask groundLayers;
 
-	PlatformerInputModule inputModule;
-
 	bool grounded;
+    public bool glideMode = false;
 	Rigidbody2D rb2d;
 	public SpriteRenderer sr;
 	Animator anim;
@@ -33,9 +32,8 @@ public class PlatformerController : MonoBehaviour
 	void Start ()
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
-        myTrans = this.transform;
+        myTrans = transform;
 		groundTags = GameObject.FindGameObjectsWithTag("ground_tag");
-		inputModule = gameObject.GetComponent<PlatformerInputModule> ();
 
 		anim = GetComponent<Animator> ();
 		sr = GetComponent<SpriteRenderer> ();
@@ -43,7 +41,7 @@ public class PlatformerController : MonoBehaviour
 
 	void Update ()
 	{
-		if (inputModule.inDisplay) {
+		if (Player.instance.inDisplay) {
 			return;
 		}
 		foreach (GameObject gt in groundTags) {
@@ -69,7 +67,7 @@ public class PlatformerController : MonoBehaviour
 		newVelocity.x = input.x * speed;
 		newVelocity.y += -gravity * Time.deltaTime;
 
-		if (Player.instance.playerMode == Player.Mode.Blue && newVelocity.y < -20) {
+		if (glideMode && newVelocity.y < -20) {
 			rb2d.velocity = new Vector2 (newVelocity.x, rb2d.velocity.y);
 		} else {
 			rb2d.velocity = newVelocity;

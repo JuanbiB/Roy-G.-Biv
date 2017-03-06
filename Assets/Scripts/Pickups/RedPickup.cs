@@ -6,8 +6,8 @@ public class RedPickup : ColorPickup {
 
     public override void MyFunction()
     {
-        Player.instance.redUnlocked = true;
-        Player.instance.RedMode();
+        CM.redUnlocked = true;
+        CM.RedMode();
     }
 
 }
