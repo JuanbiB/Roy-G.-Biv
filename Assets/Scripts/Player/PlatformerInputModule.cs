@@ -43,14 +43,6 @@ public class PlatformerInputModule : MonoBehaviour
         }
     }
 
-	void OnTriggerEnter2D(Collider2D other){
-        if (other.name == "juanbi") {
-			controller.jumpVelocity = 25;
-			Destroy (other.gameObject);
-		}
-			
-    }
-
     void OnCollisionEnter2D(Collision2D other)
     {
 		if (other.gameObject.tag == "MovingPlatform")
