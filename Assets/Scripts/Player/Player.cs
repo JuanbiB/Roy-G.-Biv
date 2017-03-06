@@ -28,6 +28,8 @@ public class Player : MonoBehaviour {
 	// Stores the original value of gravity used in respawn
 	float originalGravity;
 
+    SpriteRenderer sr;
+
     void Awake()
     {
         // Check if instance already exists
@@ -52,7 +54,8 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        // Register the controller
+        // Register the controller and sprite renderer
+        sr = GetComponent<SpriteRenderer>();
         controller = gameObject.GetComponent<PlatformerController>();
 		originalGravity = controller.gravity;
 
@@ -71,6 +74,7 @@ public class Player : MonoBehaviour {
     {
 
     }
+
 	public void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("obstacle")) {
 
@@ -138,16 +142,16 @@ public class Player : MonoBehaviour {
     public void WhiteMode()
     {
         instance.playerMode = Mode.White;
-        controller.sr.color = Color.white;
-        if (Player.instance.blueUnlocked)
+        sr.color = Color.white;
+        if (instance.blueUnlocked)
         {
             GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[6];
         }
-        else if (Player.instance.yellowUnlocked)
+        else if (instance.yellowUnlocked)
         {
             GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[3];
         }
-        else if (Player.instance.redUnlocked)
+        else if (instance.redUnlocked)
         {
             GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[1];
         }
@@ -158,7 +162,7 @@ public class Player : MonoBehaviour {
     {
         ResetAttributes();
         instance.playerMode = Mode.Red;
-        controller.sr.color = Color.red;
+        sr.color = Color.red;
         controller.jumpVelocity = 25;
         if (instance.blueUnlocked)
         {
@@ -179,7 +183,7 @@ public class Player : MonoBehaviour {
     {
         ResetAttributes();
         instance.playerMode = Mode.Yellow;
-        controller.sr.color = Color.yellow;
+        sr.color = Color.yellow;
         controller.speed = 15;
         if (instance.blueUnlocked)
         {
@@ -196,7 +200,7 @@ public class Player : MonoBehaviour {
     {
         ResetAttributes();
         instance.playerMode = Mode.Blue;
-        controller.sr.color = Color.blue;
+        sr.color = Color.blue;
         controller.gravity = 15;
         controller.jumpVelocity = 10;
         GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
@@ -206,7 +210,7 @@ public class Player : MonoBehaviour {
     {
         ResetAttributes();
         instance.playerMode = Mode.Black;
-        controller.sr.color = Color.black;
+        sr.color = Color.black;
         controller.gravity = 80;
         controller.jumpVelocity = 2;
         GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[0];
