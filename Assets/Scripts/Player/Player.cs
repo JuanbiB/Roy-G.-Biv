@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-	public float blacklifetime=5;
+
+	public float blacklifetime = 5;
+
     // Instance of the player
     public static Player instance;
 
@@ -69,12 +71,6 @@ public class Player : MonoBehaviour {
 		checkPoint = transform.position;
     }
 
-    
-    void Respawn()
-    {
-
-    }
-
 	public void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("obstacle")) {
 
@@ -89,6 +85,7 @@ public class Player : MonoBehaviour {
 
 
 	}
+
 	IEnumerator WaitSeconds(float seconds){
 		instance.playerMode = Mode.Black;
 		Player.instance.BlackMode();
