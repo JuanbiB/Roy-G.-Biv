@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -19,6 +20,9 @@ public class Player : MonoBehaviour {
 
 	// Stores the original value of gravity used in respawn
 	float originalGravity;
+
+    // Current level being played;
+    int level = 0;
 
     void Awake()
     {
@@ -58,13 +62,17 @@ public class Player : MonoBehaviour {
     
     public void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("obstacle")) {
-			Destroy (gameObject);
+            Destroy(gameObject);
 		}
         else if(other.CompareTag("Checkpoint"))
         {
             SetCheckpoint();
             SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer>();
             flagsr.color = Color.black;
+        }
+        else if (other.CompareTag("NextLevelPortal"))
+        {
+            NextLevel();
         }
     }
 
@@ -145,6 +153,13 @@ public class Player : MonoBehaviour {
             transform.SetParent(null);
             gameObject.GetComponent<Animator>().SetBool("grounded", false);
         }
+    }
+
+
+    public void NextLevel()
+    {
+        level++;
+        SceneManager.LoadScene("Level " + level);
     }
 
 }
