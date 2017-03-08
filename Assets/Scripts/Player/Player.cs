@@ -23,7 +23,7 @@ public class Player : MonoBehaviour {
 
     // Current level being played;
     int level = 0;
-
+    
     void Awake()
     {
         // Check if instance already exists
@@ -69,6 +69,9 @@ public class Player : MonoBehaviour {
             SetCheckpoint();
             SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer>();
             flagsr.color = Color.black;
+        }
+        else if(other.CompareTag("SpikeFallTrigger")){
+            other.GetComponent<FallingSpikesTrigger>().Fall();
         }
         else if (other.CompareTag("NextLevelPortal"))
         {
