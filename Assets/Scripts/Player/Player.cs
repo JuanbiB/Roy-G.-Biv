@@ -70,6 +70,10 @@ public class Player : MonoBehaviour {
             SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer>();
             flagsr.color = Color.black;
         }
+        else if (other.CompareTag("SpikeFallTrigger"))
+        {
+            other.GetComponent<FallingSpikesTrigger>().Fall();
+        }
         else if (other.CompareTag("NextLevelPortal"))
         {
             NextLevel();
