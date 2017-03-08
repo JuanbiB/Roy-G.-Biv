@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 	float originalGravity;
 
     // Current level being played;
-    int level = 0;
+    int level = 1;
 
     void Awake()
     {
@@ -127,7 +127,6 @@ public class Player : MonoBehaviour {
 
             if (hitSideNormal == hitSideRay.transform.up)
             {
-                Debug.Log("top");
                 transform.SetParent(other.transform);
             }
             else if (hitSideNormal == hitSideRay.transform.right)
@@ -158,7 +157,10 @@ public class Player : MonoBehaviour {
 
     public void NextLevel()
     {
+
         level++;
+		checkPoint = Vector2.zero;
+		gameObject.transform.position = Vector2.zero;
         SceneManager.LoadScene("Level " + level);
     }
 
