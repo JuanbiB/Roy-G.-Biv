@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
-
+	ColorManager CM;
     // Instance of the player
     public static Player instance;
 
@@ -53,6 +53,9 @@ public class Player : MonoBehaviour {
 
 		// first checkpoint is always at beginning of the level
 		checkPoint = transform.position;
+
+		//get color manager 
+		CM = GetComponent<ColorManager>();
     }
 
     public void SetCheckpoint()
@@ -62,23 +65,22 @@ public class Player : MonoBehaviour {
     
     public void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("obstacle")) {
-			other.GetComponent<Player>().Die();
+			other.GetComponent<Player> ().Die ();
+		} else if (other.CompareTag ("Checkpoint")) {
+			SetCheckpoint ();
+			SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer> ();
+			flagsr.color = Color.black;
+		} else if (other.CompareTag ("SpikeFallTrigger")) {
+			other.GetComponent<FallingSpikesTrigger> ().Fall ();
+		} else if (other.CompareTag ("NextLevelPortal")) {
+			NextLevel ();
+		} else if (other.CompareTag ("raindrop")) {
+			CM.BlackMode ();
+
 		}
-        else if(other.CompareTag("Checkpoint"))
-        {
-            SetCheckpoint();
-            SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer>();
-            flagsr.color = Color.black;
-        }
-        else if (other.CompareTag("SpikeFallTrigger"))
-        {
-            other.GetComponent<FallingSpikesTrigger>().Fall();
-        }
-        else if (other.CompareTag("NextLevelPortal"))
-        {
-            NextLevel();
-        }
     }
+
+
 
     public void Die()
     {

@@ -123,28 +123,24 @@ public class ColorManager : MonoBehaviour
         GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
     }
 
-    public void BlackMode()
-    {
-        ResetAttributes();
-        currentMode = Mode.Black;
-        sr.color = Color.black;
-        controller.gravity = 80;
-        controller.jumpVelocity = 2;
-        GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[0];
-    }
+	public void BlackMode()
+	{
+		ResetAttributes();
+		currentMode = Mode.Black;
+		sr.color = Color.black;
+		controller.gravity = 80;
+		controller.jumpVelocity = 2;
+		StartCoroutine (WaitSeconds (5));
+	}
 
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("raindrop") && currentMode != Mode.Black)
-        {
-            StartCoroutine(WaitSeconds(blacklifetime));
-            currentMode = Mode.White;
-        }
-    }
+
+
+	IEnumerator WaitSeconds(float seconds)
+	{
+		Debug.Log ("wait seconds");
+		ResetAttributes ();
+		yield return new WaitForSeconds(seconds);
+	}
     
-    IEnumerator WaitSeconds(float seconds)
-    {
-        currentMode = Mode.Black;
-        yield return new WaitForSeconds(seconds);
-    }
+
 }
