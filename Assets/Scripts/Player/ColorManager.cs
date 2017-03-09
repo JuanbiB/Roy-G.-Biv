@@ -125,6 +125,7 @@ public class ColorManager : MonoBehaviour
 
 	public void BlackMode()
 	{
+		currentMode = Mode.Black;
 		ResetAttributes();
 		currentMode = Mode.Black;
 		sr.color = Color.black;
