@@ -62,7 +62,7 @@ public class Player : MonoBehaviour {
     
     public void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("obstacle")) {
-            Destroy(gameObject);
+			other.GetComponent<Player>().Die();
 		}
         else if(other.CompareTag("Checkpoint"))
         {
