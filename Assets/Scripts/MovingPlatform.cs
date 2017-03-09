@@ -23,10 +23,8 @@ public class MovingPlatform : MonoBehaviour {
     {
         if(points.Length <= 1)
         {
-            Debug.Log("Moving platform should have more than 1 point to cycle between.");
             return;
         }
-        Debug.Log(endPoint);
         if (platform.transform.position == endPoint.position)
         {
             currentPointIndex = (currentPointIndex + 1) % points.Length;
