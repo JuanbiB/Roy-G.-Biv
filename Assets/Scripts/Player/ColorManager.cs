@@ -131,16 +131,21 @@ public class ColorManager : MonoBehaviour
 		controller.gravity = 80;
 		controller.jumpVelocity = 2;
 		StartCoroutine (WaitSeconds (5));
+
 	}
 
 
 
 	IEnumerator WaitSeconds(float seconds)
 	{
-		Debug.Log ("wait seconds");
+		{Debug.Log ("wait seconds");
+
+			yield return new  WaitForSeconds(seconds);}
+		Debug.Log ("white mode");
 		ResetAttributes ();
-		yield return new WaitForSeconds(seconds);
+		WhiteMode();
 	}
+
     
 
 }
