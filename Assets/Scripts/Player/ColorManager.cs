@@ -123,10 +123,28 @@ public class ColorManager : MonoBehaviour
         GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
     }
 
+	public bool prevyellow,prevred,prevblue;
+
 	public void BlackMode()
 	{
+		 prevyellow = false;
+		if (yellowUnlocked) {
+			prevyellow = true;
+			yellowUnlocked = false;
+		}
+		 prevred = false;
+		if (redUnlocked) {
+			prevred = true;
+			redUnlocked = false;
+		}
+		 prevblue = false;
+		if (blueUnlocked) {
+			prevblue = true;
+			blueUnlocked = false;
+		}
+			
+			
 		currentMode = Mode.Black;
-		ResetAttributes();
 		currentMode = Mode.Black;
 		sr.color = Color.black;
 		controller.gravity = 80;
@@ -140,7 +158,16 @@ public class ColorManager : MonoBehaviour
 		{Debug.Log ("wait seconds");
 
 			yield return new  WaitForSeconds(seconds);}
-		Debug.Log ("white mode");
+
+		if (prevyellow) {
+			yellowUnlocked = true;
+		}
+		if (prevblue) {
+			blueUnlocked = true;
+		}
+		if (prevred) {
+			redUnlocked=true;
+		}
 		ResetAttributes ();
 		WhiteMode();
 	}
