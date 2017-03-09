@@ -55,11 +55,8 @@ public class Player : MonoBehaviour {
 		// first checkpoint is always at beginning of the level
 		checkPoint = transform.position;
 
-
-		//get color manager 
-		CM = GetComponent<ColorManager>();
-
-
+        //get color manager 
+        CM = GetComponent<ColorManager>();
 
         // Get the level number
         if (SceneManager.GetActiveScene().name == "Main Menu")
@@ -149,7 +146,6 @@ public class Player : MonoBehaviour {
 
             if (hitSideNormal == hitSideRay.transform.up)
             {
-                
                 transform.SetParent(other.transform);
             }
      
@@ -165,7 +161,6 @@ public class Player : MonoBehaviour {
             gameObject.GetComponent<Animator>().SetBool("grounded", false);
         }
     }
-
 
     public void NextLevel()
     {

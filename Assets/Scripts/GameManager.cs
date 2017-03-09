@@ -46,5 +46,4 @@ public class GameManager : MonoBehaviour {
         paused = false;
     }
 
-
 }

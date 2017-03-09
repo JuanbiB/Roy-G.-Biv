@@ -132,9 +132,7 @@ public class ColorManager : MonoBehaviour
 		controller.gravity = 80;
 		controller.jumpVelocity = 2;
 		StartCoroutine (WaitSeconds (blacklifetime));
-
 	}
-
 
 
 	IEnumerator WaitSeconds(float seconds)
