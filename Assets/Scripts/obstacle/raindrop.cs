@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class raindrop : MonoBehaviour {
-	public float speed=5;
+	
 	public float lifeTime=5;
 
 	// Use this for initialization
@@ -12,8 +12,7 @@ public class raindrop : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		transform.position += Vector3.down * speed * Time.deltaTime;
+	void Update () { 
 	}
 
 	IEnumerator KillAfterSeconds(float seconds){

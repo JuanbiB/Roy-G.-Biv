@@ -146,6 +146,7 @@ public class ColorManager : MonoBehaviour
 		sr.color = Color.black;
 		controller.gravity = 80;
 		controller.jumpVelocity = 2;
+        controller.speed = 3;
 		StartCoroutine (WaitSeconds (blacklifetime));
 	}
 
