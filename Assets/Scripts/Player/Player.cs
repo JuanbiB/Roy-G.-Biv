@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 public class Player : MonoBehaviour {
 
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour {
 	float originalGravity;
 
     // Current level being played;
-    int level = 0;
+    int level;
 
     void Awake()
     {
@@ -53,6 +54,20 @@ public class Player : MonoBehaviour {
 
 		// first checkpoint is always at beginning of the level
 		checkPoint = transform.position;
+
+        Debug.Log(SceneManager.GetActiveScene().name);
+
+        // Get the level number
+        if (SceneManager.GetActiveScene().name == "Main Menu")
+        {
+            level = 0;
+        }
+        else
+        {
+            string levelName =Regex.Replace(SceneManager.GetActiveScene().name, "[A-Za-z ]", "");
+            level = int.Parse(levelName);
+        }
+        Debug.Log(level);
     }
 
     public void SetCheckpoint()
