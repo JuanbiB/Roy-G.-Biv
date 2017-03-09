@@ -127,17 +127,14 @@ public class ColorManager : MonoBehaviour
 
 	public void BlackMode()
 	{
-		 prevyellow = false;
 		if (yellowUnlocked) {
 			prevyellow = true;
 			yellowUnlocked = false;
 		}
-		 prevred = false;
 		if (redUnlocked) {
 			prevred = true;
 			redUnlocked = false;
 		}
-		 prevblue = false;
 		if (blueUnlocked) {
 			prevblue = true;
 			blueUnlocked = false;
@@ -158,7 +155,6 @@ public class ColorManager : MonoBehaviour
 		{Debug.Log ("wait seconds");
 
 			yield return new  WaitForSeconds(seconds);}
-
 		if (prevyellow) {
 			yellowUnlocked = true;
 		}
