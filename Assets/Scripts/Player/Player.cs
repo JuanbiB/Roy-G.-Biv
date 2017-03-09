@@ -162,6 +162,7 @@ public class Player : MonoBehaviour {
 
     public void NextLevel()
     {
+		gameObject.transform.position = Vector2.zero;
         level++;
         SceneManager.LoadScene("Level " + level);
     }
