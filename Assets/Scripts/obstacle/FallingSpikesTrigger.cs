@@ -8,18 +8,6 @@ public class FallingSpikesTrigger : MonoBehaviour
     // Falling spikes lifetime
     public float lifeTime = 2;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     IEnumerator ReturnToStart(float seconds, GameObject spikes, Vector3 origSpikesPos)
     {
         yield return new WaitForSeconds(seconds); // this halts the functions execution for x seconds. Can only be used in coroutines.

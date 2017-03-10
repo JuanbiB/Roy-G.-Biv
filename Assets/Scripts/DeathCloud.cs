@@ -20,8 +20,7 @@ public class DeathCloud : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
 			// death to the player
-			Debug.Log("yoo");
-			other.GetComponent<Player>().Die();
+			other.GetComponent<Player>().CloudDie();
 		}
 	}
 }

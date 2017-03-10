@@ -25,6 +25,11 @@ public class Player : MonoBehaviour {
     // Current level being played;
     int level;
 
+    // Breaking Platform
+    public GameObject ConfettiPrefab;
+
+    public Sprite[] backgrounds;
+
     void Awake()
     {
         // Check if instance already exists
@@ -78,7 +83,7 @@ public class Player : MonoBehaviour {
     
     public void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("obstacle")) {
-			Die ();
+			ObstacleDie ();
 		} else if (other.CompareTag ("Checkpoint")) {
 			SetCheckpoint ();
 			SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer> ();
@@ -93,17 +98,25 @@ public class Player : MonoBehaviour {
 		}
     }
 
-
-
-    public void Die()
+    public void ObstacleDie()
     {
         // Prevent player from moving 
         inDisplay = true;
 
-        // storing the original gravity value
-        //originalGravity = controller.gravity;
-        //controller.gravity = 0;
-        //rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
+        rb2d.velocity = Vector3.zero;
+
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        Instantiate(ConfettiPrefab, transform.position, Quaternion.identity);
+
+        // Start coroutine that'll reset the player's location to last checkpoint
+        StartCoroutine(BeginRespawn(2f));
+    }
+
+    public void CloudDie()
+    {
+        // Prevent player from moving 
+        inDisplay = true;
 
         // Slow velocity as they enter the cloud
         rb2d.velocity = new Vector3(0, -1, 0);
@@ -118,6 +131,11 @@ public class Player : MonoBehaviour {
 
     IEnumerator BeginRespawn(float seconds){
 		yield return new WaitForSeconds (seconds);
+        
+        if (gameObject.GetComponent<SpriteRenderer>().enabled == false)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        }
 
 		// return control to the player
 		inDisplay = false;
@@ -130,15 +148,11 @@ public class Player : MonoBehaviour {
 
 		// reset dead boolean in the animator
 		gameObject.GetComponent<Animator> ().SetBool ("dead", false);
-
-        // reset gravity 
-        //controller.gravity = originalGravity;
-        //rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
 	}
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "MovingPlatform")
+        if (other.gameObject.tag == "MovingPlatform"|| other.gameObject.tag == "BreakingPlatform")
         {
             hitSideRay = Physics2D.Linecast(transform.position, other.transform.position, playerMask);
             Vector3 hitSideNormal = hitSideRay.normal;
@@ -146,11 +160,16 @@ public class Player : MonoBehaviour {
 
             if (hitSideNormal == hitSideRay.transform.up)
             {
-                transform.SetParent(other.transform);
-            }
-     
+                if (other.gameObject.tag == "MovingPlatform")
+                {
+                    transform.SetParent(other.transform);
+                }
+                else if(other.gameObject.tag == "BreakingPlatform")
+                {
+                    other.gameObject.GetComponent<BreakingPlatform>().Break();
+                }
+            }     
         }
-
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -164,9 +183,14 @@ public class Player : MonoBehaviour {
 
     public void NextLevel()
     {
-		gameObject.transform.position = Vector2.zero;
+        gameObject.transform.position = Vector2.zero;
         level++;
         SceneManager.LoadScene("Level " + level);
-    }
 
+        // Changes the background when the level changes
+        Debug.Log(level);
+        Transform background = transform.FindChild("Main Camera").FindChild("background");
+        background.GetComponent<SpriteRenderer>().sprite = backgrounds[level-1];
+        SetCheckpoint();
+    }
 }
