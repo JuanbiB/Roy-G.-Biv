@@ -33,7 +33,7 @@ public class WinScene : MonoBehaviour {
 
         if (timer > nextTime)
         {
-            Vector3 pos = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
+            Vector3 pos = new Vector3(Random.Range(-8, 8), Random.Range(-5, 5), 0);
 
             Instantiate(ConfettiPrefab, pos, Quaternion.identity);
 
