@@ -64,8 +64,7 @@ public class Player : MonoBehaviour {
 		// first checkpoint is always at beginning of the level
 		checkPoint = transform.position;
 
-        //get color manager 
-        ColorManager CM = GetComponent<ColorManager>();
+        CM = GetComponent<ColorManager>();
 
         // Get the level number
         if (SceneManager.GetActiveScene().name == "Main Menu")
