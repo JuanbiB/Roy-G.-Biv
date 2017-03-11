@@ -133,8 +133,11 @@ public class ColorManager : MonoBehaviour
         {
             return;
         }
-        if(currentMode == Mode.Yellow)
+        if (currentMode == Mode.Yellow)
         {
+            WhiteMode();
+        }
+        else { 
             ResetAttributes();
             currentMode = Mode.Yellow;
             sr.color = Color.yellow;

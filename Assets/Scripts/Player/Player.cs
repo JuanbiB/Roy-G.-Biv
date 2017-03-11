@@ -58,8 +58,8 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        //originalGravity = controller.gravity;
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+        inDisplay = false;
 
 		// first checkpoint is always at beginning of the level
 		checkPoint = transform.position;
@@ -87,9 +87,11 @@ public class Player : MonoBehaviour {
 			ObstacleDie ();
 		} else if (other.CompareTag ("Checkpoint")) {
 			SetCheckpoint ();
-            AudioSource.PlayClipAtPoint(CheckpointSound, transform.position);
-            SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer> ();
-			flagsr.color = Color.black;
+            SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer>();
+            if(flagsr.color != Color.black) {
+                AudioSource.PlayClipAtPoint(CheckpointSound, transform.position);
+                flagsr.color = Color.black;
+            }
 		} else if (other.CompareTag ("SpikeFallTrigger")) {
 			other.GetComponent<FallingSpikesTrigger> ().Fall ();
 		} else if (other.CompareTag ("NextLevelPortal")) {
@@ -182,6 +184,7 @@ public class Player : MonoBehaviour {
         {
             transform.SetParent(null);
             gameObject.GetComponent<Animator>().SetBool("grounded", false);
+            DontDestroyOnLoad(gameObject);
         }
     }
 
