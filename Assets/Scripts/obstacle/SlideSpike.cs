@@ -13,7 +13,7 @@ public class SlideSpike : MonoBehaviour {
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+        rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
         StartCoroutine(KillAfterSeconds(lifeTime));
     }
 
