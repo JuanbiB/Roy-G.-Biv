@@ -59,6 +59,7 @@ public class Player : MonoBehaviour {
     void Start ()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+
         inDisplay = false;
 
 		// first checkpoint is always at beginning of the level

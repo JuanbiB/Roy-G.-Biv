@@ -52,7 +52,6 @@ public class PlatformerController : MonoBehaviour
 				break;	
 		}
         
-        // grounded = CheckGrounded ();
         ApplyHorizontalInput ();
 
 		if (Input.GetButtonDown("Jump"))
@@ -96,7 +95,6 @@ public class PlatformerController : MonoBehaviour
 		}
 		sr.flipX = facing == -1 ;
 
-        //CHANGED isGROUNDED and FIXED ANIMATIONS on PLATFORMS
 		anim.SetBool ("grounded", isGrounded);
 		anim.SetFloat ("speed", Mathf.Abs(rb2d.velocity.x));
 	}

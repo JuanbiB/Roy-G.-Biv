@@ -13,12 +13,14 @@ public class GameManager : MonoBehaviour {
     // Current level
     public int level;
 
-    // Boolean representing if the game is paused or not
     public bool paused;
 
     // UI component representing player state, and array holding all options
     public Image stateUI;
     public Sprite[] stateOptions;
+
+    public GameObject pauseMenu;
+    public GameObject pauseButton;
 
     void Awake ()
     {
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour {
         // Level begins at the main menu, unpaused
         level = 0;
         paused = false;
+        pauseMenu.SetActive(false);
     }
 
 
@@ -52,4 +55,33 @@ public class GameManager : MonoBehaviour {
 		SceneManager.LoadScene ("Level 1");
 	}
 
+    public void Pause()
+    {
+        paused = true;
+        pauseMenu.SetActive(true);
+
+        //Player.instance.anim.enabled = false;
+        Time.timeScale = 0;
+
+        stateUI.gameObject.SetActive(false);
+        pauseButton.SetActive(false);
+
+    }
+
+    public void Unpause()
+    {
+        paused = false;
+        pauseMenu.SetActive(false);
+
+        //Player.instance.anim.enabled = true;
+        Time.timeScale = 1;
+
+        stateUI.gameObject.SetActive(true);
+        pauseButton.SetActive(true);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
