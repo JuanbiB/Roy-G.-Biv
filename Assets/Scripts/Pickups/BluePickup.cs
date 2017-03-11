@@ -6,6 +6,7 @@ public class BluePickup : ColorPickup {
 
     public override void MyFunction()
     {
-        CM.blueUnlocked = true;
+        ColorManager.instance.blueUnlocked = true;
+        ColorManager.instance.BlueMode();
     }
 }

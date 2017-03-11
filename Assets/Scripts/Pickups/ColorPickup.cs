@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class ColorPickup : MonoBehaviour {
 
-    // All pickups need a reference to the Color Manager
-    public ColorManager CM;
-
     public AudioClip LevelUpSound;
-
-    void Start()
-    {
-        CM = FindObjectOfType<ColorManager>();
-    }
 
     // All color pickups will oscillate in size
     void Update()
