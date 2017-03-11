@@ -32,6 +32,16 @@ public class PlatformerInputModule : MonoBehaviour
         {
             CM.BlueMode();
         }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(GameManager.instance.paused)
+            {
+                GameManager.instance.Unpause();
+            } else
+            {
+                GameManager.instance.Pause();
+            }
+        }
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (input.magnitude > 1) {
