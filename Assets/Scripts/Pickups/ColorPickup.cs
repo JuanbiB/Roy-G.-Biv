@@ -7,6 +7,8 @@ public class ColorPickup : MonoBehaviour {
     // All pickups need a reference to the Color Manager
     public ColorManager CM;
 
+    public AudioClip LevelUpSound;
+
     void Start()
     {
         CM = FindObjectOfType<ColorManager>();
@@ -24,6 +26,7 @@ public class ColorPickup : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            AudioSource.PlayClipAtPoint(LevelUpSound, transform.position);
             MyFunction();
             Destroy(gameObject);
         }

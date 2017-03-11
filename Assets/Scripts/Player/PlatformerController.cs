@@ -29,7 +29,9 @@ public class PlatformerController : MonoBehaviour
     public LayerMask playerMask;
     public bool isGrounded = false;
 
-	void Start ()
+    public AudioClip JumpSound;
+
+    void Start ()
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
         myTrans = transform;
@@ -79,6 +81,7 @@ public class PlatformerController : MonoBehaviour
 	{
         if (isGrounded)
         {
+            AudioSource.PlayClipAtPoint(JumpSound, transform.position);
             rb2d.velocity += jumpVelocity * Vector2.up;
         }
 	}

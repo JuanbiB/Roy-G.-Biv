@@ -8,8 +8,6 @@ public class ConfettiExplosion : MonoBehaviour {
     public Sprite[] frames;
     [Tooltip("How fast does the animation play")]
     public float framesPerSecond;
-    [Tooltip("An Audioclip with the sound that is played when the explosion happens")]
-    public AudioClip explosionSound;
     SpriteRenderer spriteRenderer;
 
     /// <summary>
@@ -17,10 +15,6 @@ public class ConfettiExplosion : MonoBehaviour {
     /// </summary>
     void Start()
     {
-        if (explosionSound != null)
-        {
-            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
-        }
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(PlayAnimation());
     }

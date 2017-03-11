@@ -30,6 +30,10 @@ public class Player : MonoBehaviour {
 
     public Sprite[] backgrounds;
 
+    public AudioClip DeathSound;
+    public AudioClip CheckpointSound;
+    public AudioClip crumbleSound;
+
     void Awake()
     {
         // Check if instance already exists
@@ -61,7 +65,7 @@ public class Player : MonoBehaviour {
 		checkPoint = transform.position;
 
         //get color manager 
-        CM = GetComponent<ColorManager>();
+        ColorManager CM = GetComponent<ColorManager>();
 
         // Get the level number
         if (SceneManager.GetActiveScene().name == "Main Menu")
@@ -86,7 +90,8 @@ public class Player : MonoBehaviour {
 			ObstacleDie ();
 		} else if (other.CompareTag ("Checkpoint")) {
 			SetCheckpoint ();
-			SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer> ();
+            AudioSource.PlayClipAtPoint(CheckpointSound, transform.position);
+            SpriteRenderer flagsr = other.gameObject.GetComponent<SpriteRenderer> ();
 			flagsr.color = Color.black;
 		} else if (other.CompareTag ("SpikeFallTrigger")) {
 			other.GetComponent<FallingSpikesTrigger> ().Fall ();
@@ -97,6 +102,8 @@ public class Player : MonoBehaviour {
 
     public void ObstacleDie()
     {
+        AudioSource.PlayClipAtPoint(DeathSound, transform.position);
+
         // Prevent player from moving 
         inDisplay = true;
 
@@ -112,6 +119,8 @@ public class Player : MonoBehaviour {
 
     public void CloudDie()
     {
+        AudioSource.PlayClipAtPoint(DeathSound, transform.position);
+
         // Prevent player from moving 
         inDisplay = true;
 
@@ -163,6 +172,7 @@ public class Player : MonoBehaviour {
                 }
                 else if(other.gameObject.tag == "BreakingPlatform")
                 {
+                    AudioSource.PlayClipAtPoint(crumbleSound, transform.position);
                     other.gameObject.GetComponent<BreakingPlatform>().Break();
                 }
             }     
@@ -180,6 +190,7 @@ public class Player : MonoBehaviour {
 
     public void NextLevel()
     {
+        AudioSource.PlayClipAtPoint(CheckpointSound, transform.position);
         gameObject.transform.position = Vector2.zero;
         level++;
         SceneManager.LoadScene("Level " + level);
