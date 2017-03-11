@@ -194,6 +194,11 @@ public class Player : MonoBehaviour {
         AudioSource.PlayClipAtPoint(CheckpointSound, transform.position);
         gameObject.transform.position = Vector2.zero;
         level++;
+
+        if(level == 5)
+        {
+            SceneManager.LoadScene("Win"); 
+        }
         SceneManager.LoadScene("Level " + level);
 
         // Changes the background when the level changes
