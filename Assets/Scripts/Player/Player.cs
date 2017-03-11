@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
 
 public class Player : MonoBehaviour {
-	ColorManager CM;
+	
     // Instance of the player
     public static Player instance;
 
@@ -92,9 +92,6 @@ public class Player : MonoBehaviour {
 			other.GetComponent<FallingSpikesTrigger> ().Fall ();
 		} else if (other.CompareTag ("NextLevelPortal")) {
 			NextLevel ();
-		} else if (other.CompareTag ("raindrop")) {
-			CM.BlackMode ();
-
 		}
     }
 

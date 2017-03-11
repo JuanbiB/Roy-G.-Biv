@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
+    public static ColorManager instance;
+
     PlatformerController controller;
     SpriteRenderer sr;
 
@@ -21,6 +23,26 @@ public class ColorManager : MonoBehaviour
     // Duration of the Black Mode debuff
     float blacklifetime = 5;
 
+    void Awake()
+    {
+        // Check if instance already exists
+        if (instance == null)
+        {
+            // If not, set instance to this
+            instance = this;
+        }
+
+        // If instance already exists and it's not this:
+        else if (instance != this)
+        {
+            // Then destroy this, enforcing the Singleton pattern.
+            Destroy(gameObject);
+        }
+
+        // Sets this to not be destroyed when loading a new scene.
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -32,6 +54,14 @@ public class ColorManager : MonoBehaviour
         redUnlocked = false;
         yellowUnlocked = false;
         blueUnlocked = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("raindrop"))
+        {
+            BlackMode();
+        }
     }
 
     // Reset defaults to avoid retaining characteristics from other modes.
