@@ -7,7 +7,6 @@ public class YellowPickup : ColorPickup {
     public override void MyFunction()
     {
         CM.yellowUnlocked = true;
-        CM.YellowMode();
     }
 
 }

@@ -23,6 +23,8 @@ public class ColorManager : MonoBehaviour
     // Duration of the Black Mode debuff
     float blacklifetime = 5;
 
+    public AudioClip DeathSound;
+
     void Awake()
     {
         // Check if instance already exists
@@ -60,6 +62,7 @@ public class ColorManager : MonoBehaviour
     {
         if (other.CompareTag("raindrop"))
         {
+            AudioSource.PlayClipAtPoint(DeathSound, transform.position);
             BlackMode();
         }
     }
