@@ -139,18 +139,17 @@ public class ColorManager : MonoBehaviour
 			prevblue = true;
 			blueUnlocked = false;
 		}
-
-        Mode prevMode = currentMode;	
+        
 		currentMode = Mode.Black;
 		sr.color = Color.black;
 		controller.gravity = 80;
 		controller.jumpVelocity = 2;
         controller.speed = 3;
-		StartCoroutine (WaitSeconds (blacklifetime, prevMode));
+		StartCoroutine (WaitSeconds (blacklifetime));
     }
 
 
-	IEnumerator WaitSeconds(float seconds, Mode prevMode)
+	IEnumerator WaitSeconds(float seconds)
 	{
 	    yield return new  WaitForSeconds(seconds);
 		if (prevyellow) {
@@ -164,26 +163,6 @@ public class ColorManager : MonoBehaviour
 		}
 
 		ResetAttributes ();
-
-        if (prevMode == Mode.White)
-        {
-            currentMode = Mode.White;
-            WhiteMode();
-        }
-        else if (prevMode == Mode.Blue)
-        {
-            currentMode = Mode.Blue;
-            BlueMode();
-        }
-        else if (prevMode == Mode.Red)
-        {
-            currentMode = Mode.Red;
-            RedMode();
-        }
-        else if (prevMode == Mode.Yellow)
-        {
-            currentMode = Mode.Yellow;
-            YellowMode();
-        }
+        WhiteMode();
     }
 }

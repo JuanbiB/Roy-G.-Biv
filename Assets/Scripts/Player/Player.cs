@@ -188,7 +188,6 @@ public class Player : MonoBehaviour {
         SceneManager.LoadScene("Level " + level);
 
         // Changes the background when the level changes
-        Debug.Log(level);
         Transform background = transform.FindChild("Main Camera").FindChild("background");
         background.GetComponent<SpriteRenderer>().sprite = backgrounds[level-1];
         SetCheckpoint();
