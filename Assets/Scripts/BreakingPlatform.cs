@@ -13,7 +13,7 @@ public class BreakingPlatform : MonoBehaviour {
 
     public float lifetime = 2f;
 
-    public float replaceTime = 5f;
+    public float replaceTime = 4f;
 
     // Use this for initialization
     void Start () {

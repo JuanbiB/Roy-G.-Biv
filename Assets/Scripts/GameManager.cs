@@ -50,6 +50,17 @@ public class GameManager : MonoBehaviour {
         pauseMenu.SetActive(false);
     }
 
+    public void Restart()
+    {
+        Destroy(ColorManager.instance.gameObject);
+        Destroy(Player.instance.gameObject);
+        Destroy(GameManager.instance);
+        level = 1;
+        paused = false;
+        pauseMenu.SetActive(false);
+        SceneManager.LoadScene("Level " + level);
+    }
+
 
 	public void OnClick(){
 		SceneManager.LoadScene ("Level 1");

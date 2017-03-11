@@ -21,7 +21,7 @@ public class ColorManager : MonoBehaviour
     public bool blueUnlocked;
 
     // Duration of the Black Mode debuff
-    float blacklifetime = 5;
+    float blacklifetime = 3;
 
     public AudioClip DeathSound;
 

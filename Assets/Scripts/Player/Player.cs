@@ -195,15 +195,18 @@ public class Player : MonoBehaviour {
         gameObject.transform.position = Vector2.zero;
         level++;
 
-        if(level == 5)
+        if (level == 5)
         {
-            SceneManager.LoadScene("Win"); 
+            SceneManager.LoadScene("Win");
         }
-        SceneManager.LoadScene("Level " + level);
+        else
+        {
+            SceneManager.LoadScene("Level " + level);
 
-        // Changes the background when the level changes
-        Transform background = transform.FindChild("Main Camera").FindChild("background");
-        background.GetComponent<SpriteRenderer>().sprite = backgrounds[level-1];
-        SetCheckpoint();
+            // Changes the background when the level changes
+            Transform background = transform.FindChild("Main Camera").FindChild("background");
+            background.GetComponent<SpriteRenderer>().sprite = backgrounds[level - 1];
+            SetCheckpoint();
+        }
     }
 }
