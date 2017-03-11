@@ -75,6 +75,7 @@ public class ColorManager : MonoBehaviour
 
     public void WhiteMode()
     {
+        ResetAttributes();
         currentMode = Mode.White;
         sr.color = Color.white;
         if (blueUnlocked)
@@ -98,22 +99,27 @@ public class ColorManager : MonoBehaviour
         {
             return;
         }
-        ResetAttributes();
-        currentMode = Mode.Red;
-        sr.color = Color.red;
-        controller.jumpVelocity = 25;
-        controller.glideMode = false;
-        if (blueUnlocked)
+        if (currentMode == Mode.Red)
         {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[7];
-        }
-        else if (yellowUnlocked)
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[4];
-        }
-        else
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[2];
+            WhiteMode();
+        } else { 
+            ResetAttributes();
+            currentMode = Mode.Red;
+            sr.color = Color.red;
+            controller.jumpVelocity = 25;
+            controller.glideMode = false;
+            if (blueUnlocked)
+            {
+                GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[7];
+            }
+            else if (yellowUnlocked)
+            {
+                GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[4];
+            }
+            else
+            {
+                GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[2];
+            }
         }
     }
 
@@ -124,18 +130,21 @@ public class ColorManager : MonoBehaviour
         {
             return;
         }
-        ResetAttributes();
-        currentMode = Mode.Yellow;
-        sr.color = Color.yellow;
-        controller.speed = 15;
-        controller.glideMode = false;
-        if (blueUnlocked)
+        if(currentMode == Mode.Yellow)
         {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[8];
-        }
-        else
-        {
-            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[5];
+            ResetAttributes();
+            currentMode = Mode.Yellow;
+            sr.color = Color.yellow;
+            controller.speed = 15;
+            controller.glideMode = false;
+            if (blueUnlocked)
+            {
+                GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[8];
+            }
+            else
+            {
+                GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[5];
+            }
         }
     }
 
@@ -146,16 +155,22 @@ public class ColorManager : MonoBehaviour
         {
             return;
         }
-        ResetAttributes();
-        currentMode = Mode.Blue;
-        sr.color = Color.blue;
-        controller.gravity = 15;
-        controller.jumpVelocity = 10;
-        controller.glideMode = true;
-        GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
+        if(currentMode == Mode.Blue)
+        {
+            WhiteMode();
+        } else
+        {
+            ResetAttributes();
+            currentMode = Mode.Blue;
+            sr.color = Color.blue;
+            controller.gravity = 15;
+            controller.jumpVelocity = 10;
+            controller.glideMode = true;
+            GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[9];
+        }
     }
 
-	public bool prevyellow,prevred,prevblue;
+	public bool prevyellow, prevred, prevblue;
 
 	public void BlackMode()
 	{
@@ -184,6 +199,7 @@ public class ColorManager : MonoBehaviour
 	IEnumerator WaitSeconds(float seconds)
 	{
 	    yield return new  WaitForSeconds(seconds);
+
 		if (prevyellow) {
 			yellowUnlocked = true;
 		}
@@ -194,7 +210,9 @@ public class ColorManager : MonoBehaviour
 			redUnlocked=true;
 		}
 
-		ResetAttributes ();
-        WhiteMode();
+        if(currentMode == Mode.Black)
+        {
+            WhiteMode();
+        }
     }
 }
