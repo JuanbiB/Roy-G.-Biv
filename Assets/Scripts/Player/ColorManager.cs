@@ -72,6 +72,7 @@ public class ColorManager : MonoBehaviour
         currentMode = Mode.Red;
         sr.color = Color.red;
         controller.jumpVelocity = 25;
+        controller.glideMode = false;
         if (blueUnlocked)
         {
             GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[7];
@@ -97,6 +98,7 @@ public class ColorManager : MonoBehaviour
         currentMode = Mode.Yellow;
         sr.color = Color.yellow;
         controller.speed = 15;
+        controller.glideMode = false;
         if (blueUnlocked)
         {
             GameManager.instance.stateUI.sprite = GameManager.instance.stateOptions[8];
