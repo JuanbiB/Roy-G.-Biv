@@ -2,33 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Confetti explosion script modeled after Benno's explosion script from 
+// ShootEmUp lab example
 public class ConfettiExplosion : MonoBehaviour {
 
-    [Tooltip("The individual sprites of the animation")]
+    // The confetti animation frames and properties
     public Sprite[] frames;
-    [Tooltip("How fast does the animation play")]
     public float framesPerSecond;
     SpriteRenderer spriteRenderer;
 
-    /// <summary>
-    /// Start is called by Unity. This will play our explosion sound and start the sprite animation
-    /// </summary>
+    //Play confetti animation
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(PlayAnimation());
     }
 
-    /// <summary>
-    /// This is a coroutine that cycles through the sprites of our explosion animation. It needs to be started using StartCoroutine().
-    /// </summary>
+    // Cycle through frames of confetti animation
     IEnumerator PlayAnimation()
     {
         int currentFrameIndex = 0;
         while (currentFrameIndex < frames.Length)
         {
             spriteRenderer.sprite = frames[currentFrameIndex];
-            yield return new WaitForSeconds(1f / framesPerSecond); // this halts the functions execution for x seconds. Can only be used in coroutines.
+            yield return new WaitForSeconds(1f / framesPerSecond);
             currentFrameIndex++;
         }
         Destroy(gameObject);

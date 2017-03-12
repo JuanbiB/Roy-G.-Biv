@@ -10,10 +10,6 @@ public class raindrop : MonoBehaviour {
 	void Start () {
 		StartCoroutine (KillAfterSeconds (lifeTime));	
 	}
-	
-	// Update is called once per frame
-	void Update () { 
-	}
 
 	IEnumerator KillAfterSeconds(float seconds){
 		yield return new WaitForSeconds(seconds); 

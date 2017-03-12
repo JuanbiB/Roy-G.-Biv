@@ -14,6 +14,7 @@ public class PlatformerInputModule : MonoBehaviour
         CM = GetComponent<ColorManager>();
     }
 
+    // If the player has control, checks for moves, jumps, or changes in color
     void Update()
     {
 		if (Player.instance.inDisplay) {

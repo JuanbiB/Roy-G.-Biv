@@ -8,31 +8,33 @@ public class PlatformerController : MonoBehaviour
 	public Vector2 input;
 	public bool inputJump;
 
+    // jump properties
 	public float speed = 5;
 	public float jumpVelocity = 15;
 	public float gravity = 40;
-	public float groundingTolerance = .1f;
-	public float jumpingTolerance = .1f;
 
 	public LayerMask groundLayers;
-
+    
+    // variables used for movement and jumping
 	bool grounded;
     public bool glideMode = false;
-	Rigidbody2D rb2d;
+    public bool isGrounded = false;
+    int facing = 1;
+
+    //Components to be used
+    Rigidbody2D rb2d;
 	public SpriteRenderer sr;
 	Animator anim;
-
-	int facing = 1;
-
 	Transform myTrans;
 	GameObject[] groundTags;
     public LayerMask playerMask;
-    public bool isGrounded = false;
 
+    // jump sounds
     public AudioClip JumpSound;
 
     void Start ()
 	{
+        // initialize components
 		rb2d = GetComponent<Rigidbody2D> ();
         myTrans = transform;
 		groundTags = GameObject.FindGameObjectsWithTag("ground_tag");
@@ -41,6 +43,8 @@ public class PlatformerController : MonoBehaviour
 		sr = GetComponent<SpriteRenderer> ();
 	}
 
+
+    //Apply player input and update animation
 	void Update ()
 	{
 		if (Player.instance.inDisplay) {
@@ -62,6 +66,7 @@ public class PlatformerController : MonoBehaviour
 		UpdateAnimations ();
 	}
 
+    // move left or right
 	void ApplyHorizontalInput ()
 	{
 		Vector2 newVelocity = rb2d.velocity;
@@ -85,7 +90,6 @@ public class PlatformerController : MonoBehaviour
         }
 	}
 
-        
 	void UpdateAnimations ()
 	{ 
 		if (rb2d.velocity.x > 0 && facing == -1) {

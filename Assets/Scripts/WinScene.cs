@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* this script is applied to Roy in the Win scene. It allows for confetti and color changes 
+ * on the screen. Confetti spawn adapted from a unity response by robertbu:
+ * http://answers.unity3d.com/questions/774085/random-spawn-objects-within-the-screen-width-and-h.html*/
+
 public class WinScene : MonoBehaviour {
 
+    // timer for confetti spawn
     public float minSpawnTime = 0.3f;
     public float maxSpawnTime = 1.0f;
-
     private float timer = 0.0f;
     private float nextTime;
 
+    // variables for changing Roy's colors
     private SpriteRenderer Roy;
-
     Color[] colors;
-
     int counter;
 
     public GameObject ConfettiPrefab;
@@ -27,6 +30,8 @@ public class WinScene : MonoBehaviour {
         counter = 0;
     }
 
+    /*If the timer is later than the threshold for instantiating confetti, then instantiate
+     * and change Roy's color*/
     void Update()
     {
         timer += Time.deltaTime;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This script is used to change the color on the menu text
 public class MenuColorSwitcher : MonoBehaviour {
 
 	Text royText;
