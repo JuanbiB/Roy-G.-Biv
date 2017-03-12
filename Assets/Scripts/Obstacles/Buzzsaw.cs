@@ -10,9 +10,8 @@ public class Buzzsaw : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
+	// Update is called once per frame--rotates the saw
 	void Update () {
 		transform.rotation *= Quaternion.AngleAxis (rotationspeed * Time.deltaTime, Vector3.forward);
-		
 	}
 }

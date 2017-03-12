@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Destroys player if they come in contact
 public class DeathCloud : MonoBehaviour {
 
 	BoxCollider2D box_collider;
@@ -10,11 +11,6 @@ public class DeathCloud : MonoBehaviour {
 	void Start () {
 		box_collider = GetComponent<BoxCollider2D> ();
 		box_collider.isTrigger = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	void OnTriggerEnter2D(Collider2D other){

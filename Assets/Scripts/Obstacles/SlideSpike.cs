@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class SlideSpike : MonoBehaviour {
 
-
     public float lifeTime = 5;
     Rigidbody2D rb2d;
     public float speed = 3;
 
-    // Use this for initialization
+    /* Initialize spike with speed and kill time*/
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -17,11 +16,8 @@ public class SlideSpike : MonoBehaviour {
         StartCoroutine(KillAfterSeconds(lifeTime));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
+    /*Coroutine that kills the spike, adapted from Benno's ShootEmUp
+     * lab example*/
     IEnumerator KillAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);

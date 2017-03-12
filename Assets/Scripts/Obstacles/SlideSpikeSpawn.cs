@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*This class will be implemented in the spike shooters to shoot out the spikes*/
 public class SlideSpikeSpawn : MonoBehaviour {
+
     public float spawnrate = 5;
     private float spawntime = 0;
     public GameObject SlideSpikePrefab;
 	
-	// Update is called once per frame
+    /*update function shoots spikes at a certain spawn rate. Taken from
+     * Benno's ShootEmUp code from Lab 1 of class*/
 	void Update () {
 
         if (spawntime + 1 / spawnrate < Time.time)

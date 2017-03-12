@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class BreakingPlatform : MonoBehaviour {
 
-    [Tooltip("The individual sprites of the animation")]
+    // breaking platform animation frames sprite renderer
     public Sprite[] frames;
-    [Tooltip("An Audioclip with the sound that is played when the explosion happens")]
     SpriteRenderer sr;
 
     public Sprite normal;
-
     public float lifetime = 2f;
-
     public float replaceTime = 4f;
 
-    // Use this for initialization
-    void Start () {
-    }
-
+    // Destroy's the platform but saves properties so that it can be replaced
     public void Break()
     {
         Vector3 startPos= transform.position;
@@ -28,6 +22,7 @@ public class BreakingPlatform : MonoBehaviour {
         StartCoroutine(Respawn(replaceTime, startPos));
     }
 
+    //Cycles through frames to play animation
     IEnumerator PlayAnimation()
     {
         int currentFrameIndex = 0;
@@ -40,6 +35,7 @@ public class BreakingPlatform : MonoBehaviour {
         GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
+    // Respawns the platform
     IEnumerator Respawn(float seconds, Vector3 position)
     {
         yield return new WaitForSeconds(replaceTime);

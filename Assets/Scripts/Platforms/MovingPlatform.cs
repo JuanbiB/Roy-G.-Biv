@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class makes a moving platform between any two points in space
 public class MovingPlatform : MonoBehaviour {
 
     public GameObject platform;
@@ -18,7 +19,7 @@ public class MovingPlatform : MonoBehaviour {
     }
     
 
-    // Update is called once per frame
+    // Update is called once per frame--moves the platform between the two points
     void Update()
     {
         if(points.Length <= 1)
