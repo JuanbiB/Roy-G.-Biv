@@ -18,6 +18,9 @@ public class Player : MonoBehaviour {
     RaycastHit2D hitSideRay;
     public LayerMask playerMask;
 
+    // Boolean representing if palyer is in a death animation
+    public bool dead;
+
     // Keeps track of player's latest checkpoint
     Vector2 checkPoint;
 
@@ -66,6 +69,8 @@ public class Player : MonoBehaviour {
 
         inDisplay = false;
 
+        dead = false;
+
 		// first checkpoint is always at beginning of the level
 		checkPoint = transform.position;
 
@@ -109,18 +114,24 @@ public class Player : MonoBehaviour {
     //If player hits an obstacle make Roy explode into confetti and then respawn
     public void ObstacleDie()
     {
-        AudioSource.PlayClipAtPoint(DeathSound, transform.position);
+        if(!dead)
+        {
+            dead = true;
 
-        // Prevent player from moving 
-        inDisplay = true;
-        rb2d.velocity = Vector3.zero;
+            AudioSource.PlayClipAtPoint(DeathSound, transform.position);
 
-        // destroy Roy, make confetti
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        Instantiate(ConfettiPrefab, transform.position, Quaternion.identity);
+            // Prevent player from moving 
+            inDisplay = true;
+            rb2d.velocity = Vector3.zero;
 
-        // Start coroutine that'll reset the player's location to last checkpoint
-        StartCoroutine(BeginRespawn(2f));
+            // destroy Roy, make confetti
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            Instantiate(ConfettiPrefab, transform.position, Quaternion.identity);
+
+            // Start coroutine that'll reset the player's location to last checkpoint
+            StartCoroutine(BeginRespawn(2f));
+        }
+        
     }
 
     //if player hits cloud then die into cloud
@@ -161,6 +172,7 @@ public class Player : MonoBehaviour {
 
 		// reset dead boolean in the animator
 		gameObject.GetComponent<Animator> ().SetBool ("dead", false);
+        dead = false;
 	}
 
     void OnCollisionEnter2D(Collision2D other)

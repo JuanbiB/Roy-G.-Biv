@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VerticalMovePlatform : MonoBehaviour {
+public class VerticalMove : MonoBehaviour {
   
     public float MoveDistance;
 	public float MoveSpeed;

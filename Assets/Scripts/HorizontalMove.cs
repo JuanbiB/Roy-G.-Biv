@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HorizontalMovePlatform : MonoBehaviour {
+public class HorizontalMove: MonoBehaviour {
 
     public float MoveDistance;
     public float MoveSpeed;
