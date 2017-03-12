@@ -227,6 +227,7 @@ public class Player : MonoBehaviour {
         if (level == 5)
         {
             SceneManager.LoadScene("Win");
+            Destroy(gameObject);
         }
         else
         {

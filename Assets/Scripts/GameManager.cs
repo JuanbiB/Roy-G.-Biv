@@ -52,9 +52,7 @@ public class GameManager : MonoBehaviour {
 
     public void Restart()
     {
-        Destroy(ColorManager.instance.gameObject);
-        Destroy(Player.instance.gameObject);
-        Destroy(GameManager.instance);
+        Destroy(instance);
         level = 1;
         paused = false;
         pauseMenu.SetActive(false);

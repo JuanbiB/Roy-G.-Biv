@@ -23,6 +23,10 @@ public class WinScene : MonoBehaviour {
 
     void Start()
     {
+       //Destroy(Player.instance.gameObject);
+        Destroy(GameManager.instance.stateUI);
+        Destroy(GameManager.instance.pauseButton);
+
         nextTime = Random.Range(minSpawnTime, maxSpawnTime);
         Roy = GetComponent<SpriteRenderer>();
 
