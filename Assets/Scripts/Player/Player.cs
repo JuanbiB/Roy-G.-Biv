@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
+using UnityEngine.Audio;
 
 public class Player : MonoBehaviour {
 
@@ -44,6 +45,9 @@ public class Player : MonoBehaviour {
     public AudioClip DeathSound;
     public AudioClip CheckpointSound;
     public AudioClip crumbleSound;
+	//background music 
+	public AudioClip [] music;
+	public AudioClip backgroundmusic;
 
     void Awake()
     {
@@ -69,6 +73,11 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+
+		/*int randClip = Random.Range (0, music.Length);
+		backgroundmusic.clip = music[randClip];
+			backgroundmusic.Play();*/
+
         rb2d = gameObject.GetComponent<Rigidbody2D>();
 
         inDisplay = false;
