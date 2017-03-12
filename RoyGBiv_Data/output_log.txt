@@ -31,3 +31,5 @@ UnloadTime: 6.633785 ms
 Unloading 45 unused Assets to reduce memory usage. Loaded Objects now: 868.
 Total: 4.718318 ms (FindLiveObjects: 0.044476 ms CreateObjectMapping: 0.031646 ms MarkObjects: 0.280541 ms  DeleteObjects: 4.361226 ms)
 
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 321c -> priority: 1 

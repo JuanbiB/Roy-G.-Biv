@@ -1,0 +1,11 @@
+SOURCES
+
+Sound Effects:
+-Whoosh https://www.youtube.com/watch?v=oUxyg_DFMfM
+-Level up https://www.youtube.com/watch?v=P_u0k2uElHI
+-Pop https://www.youtube.com/watch?v=wJaOs-s-cGU
+-Death https://www.youtube.com/watch?v=f49ELvryhao
+
+Music:
+-Main Menu: Game of Thrones
+-Levels: Pirates of the Caribbean
