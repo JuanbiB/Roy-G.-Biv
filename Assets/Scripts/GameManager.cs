@@ -77,7 +77,6 @@ public class GameManager : MonoBehaviour {
         // Hide ingame UI
         stateUI.gameObject.SetActive(false);
         pauseButton.SetActive(false);
-
     }
 
     public void Unpause()
