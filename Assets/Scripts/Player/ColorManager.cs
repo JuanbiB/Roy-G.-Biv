@@ -8,6 +8,7 @@ public class ColorManager : MonoBehaviour
 
     PlatformerController controller;
     SpriteRenderer sr;
+    Rigidbody2D rb2d;
 
     // Different modes for the player
     public enum Mode { White, Red, Yellow, Blue, Black }
@@ -50,6 +51,7 @@ public class ColorManager : MonoBehaviour
     {
         controller = gameObject.GetComponent<PlatformerController>();
         sr = gameObject.GetComponent<SpriteRenderer>();
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
 
         // Start white, without having any powers unlocked
         currentMode = Mode.White;
@@ -167,6 +169,7 @@ public class ColorManager : MonoBehaviour
         } else
         {
             ResetAttributes();
+            rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
             currentMode = Mode.Blue;
             sr.color = Color.blue;
             controller.gravity = 15;

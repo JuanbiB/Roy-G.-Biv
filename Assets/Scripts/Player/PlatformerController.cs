@@ -73,7 +73,7 @@ public class PlatformerController : MonoBehaviour
 		newVelocity.x = input.x * speed;
 		newVelocity.y += -gravity * Time.deltaTime;
 
-		if (glideMode && newVelocity.y < -20) {
+		if (glideMode && newVelocity.y < -10) {
 			rb2d.velocity = new Vector2 (newVelocity.x, rb2d.velocity.y);
 		} else {
 			rb2d.velocity = newVelocity;
