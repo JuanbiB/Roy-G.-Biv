@@ -46,8 +46,8 @@ public class Player : MonoBehaviour {
     public AudioClip CheckpointSound;
     public AudioClip crumbleSound;
 	//background music 
-	public AudioClip [] music;
-	public AudioClip backgroundmusic;
+	//public AudioClip [] music;
+	//public AudioClip backgroundmusic;
 
     void Awake()
     {
