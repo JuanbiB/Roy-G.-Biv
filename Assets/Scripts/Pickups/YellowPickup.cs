@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class YellowPickup : ColorPickup {
 
+    // Yelolw pickup will provide the player with the yellow power
     public override void MyFunction()
     {
         ColorManager.instance.yellowUnlocked = true;

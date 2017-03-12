@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
 
 public class Player : MonoBehaviour {
-	
-    // Instance of the player
+
+    // The Player script implements the player's death, respawn, and level completion
+    // functionality through collisions with death-condition obstacles,
+    // checkpoints, and level-completion objects.
+
+    // Instance of the player for Singleton Pattern
     public static Player instance;
 
     Rigidbody2D rb2d;
@@ -184,6 +188,12 @@ public class Player : MonoBehaviour {
              * Unity forum reply by sparkzbarca:
              * http://answers.unity3d.com/questions/339532/how-can-i-detect-which-side-of-a-box-i-collided-wi.html*/
             hitSideRay = Physics2D.Linecast(transform.position, other.transform.position, playerMask);
+
+            if(!hitSideRay)
+            {
+                return;
+            }
+
             Vector3 hitSideNormal = hitSideRay.normal;
             hitSideNormal = hitSideRay.transform.TransformDirection(hitSideNormal);
 
@@ -212,6 +222,7 @@ public class Player : MonoBehaviour {
         {
             transform.SetParent(null);
             gameObject.GetComponent<Animator>().SetBool("grounded", false);
+            // Since Player changes parent, we must re-establish the DontDestroyOnLoad()
             DontDestroyOnLoad(gameObject);
         }
     }

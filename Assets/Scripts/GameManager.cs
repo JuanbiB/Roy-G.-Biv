@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     // Current level
     public int level;
 
+    // Paused state of game
     public bool paused;
 
     // UI component representing player state, and array holding all options
@@ -66,12 +67,14 @@ public class GameManager : MonoBehaviour {
 
     public void Pause()
     {
+        // Show pause menu
         paused = true;
         pauseMenu.SetActive(true);
 
-        //Player.instance.anim.enabled = false;
+        // Freeze the game
         Time.timeScale = 0;
 
+        // Hide ingame UI
         stateUI.gameObject.SetActive(false);
         pauseButton.SetActive(false);
 
@@ -79,12 +82,14 @@ public class GameManager : MonoBehaviour {
 
     public void Unpause()
     {
+        // Hide pause menu
         paused = false;
         pauseMenu.SetActive(false);
 
-        //Player.instance.anim.enabled = true;
+        // Unfreeze the game
         Time.timeScale = 1;
 
+        // Show ingame UI
         stateUI.gameObject.SetActive(true);
         pauseButton.SetActive(true);
     }

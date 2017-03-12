@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
+    // Color Manager controls the various color forms of the player and how these
+    // forms affect the color of the player via the SpriteRenderer, the physics 
+    // of the player via the rb2d and Controller, and the UI via GameManager
+
+    // Singleton Pattern implementation
     public static ColorManager instance;
 
     PlatformerController controller;
@@ -62,6 +67,7 @@ public class ColorManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // Collision with raindrop changes the player to the Black Mode
         if (other.CompareTag("raindrop"))
         {
             AudioSource.PlayClipAtPoint(DeathSound, transform.position);
@@ -78,6 +84,7 @@ public class ColorManager : MonoBehaviour
         controller.glideMode = false;
     }
 
+    // Default mode
     public void WhiteMode()
     {
         ResetAttributes();

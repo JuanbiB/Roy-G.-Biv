@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// This class makes a moving platform between any two points in space
+// This class makes a moving platform between defined points in space
 public class MovingPlatform : MonoBehaviour {
 
+    // Object representing the object that will move
     public GameObject platform;
 
     public float MoveSpeed;
     
+    // Points which the object will move to
     public Transform[] points;
+
+    // Current point to move towards and the index of that point in the points array
     Transform endPoint;
     int currentPointIndex;
 

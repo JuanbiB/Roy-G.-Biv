@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(PlatformerController))]
 public class PlatformerInputModule : MonoBehaviour
 {
+    // MODIFIED PlatformerInputModule--takes input and directs it to the player's
+    // various functions. Can manipulate the ColorManager and Controller.
+
     PlatformerController controller;
     ColorManager CM;
 
@@ -17,6 +20,7 @@ public class PlatformerInputModule : MonoBehaviour
     // If the player has control, checks for moves, jumps, or changes in color
     void Update()
     {
+        // Don't take input if in Display Mode (Main Menu)
 		if (Player.instance.inDisplay) {
 			return;
 		}
@@ -33,6 +37,7 @@ public class PlatformerInputModule : MonoBehaviour
         {
             CM.BlueMode();
         }
+        // ESC toggles the pause menu
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(GameManager.instance.paused)
