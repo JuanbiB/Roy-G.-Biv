@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class raindrop : MonoBehaviour {
+public class Raindrop : MonoBehaviour {
 	
 	public float lifeTime=5;
 

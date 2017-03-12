@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buzzsaw : MonoBehaviour {
+public class Buzzsaw : MonoBehaviour {
 	public float rotationspeed=5;
 
 	// Use this for initialization

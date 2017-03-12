@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class raindropspawn : MonoBehaviour {
+public class RaindropSpawn : MonoBehaviour {
 	public float spawnrate=5;
 	public float spawnwidth=5;
 	private float spawntime=0;
